@@ -3,11 +3,16 @@ var ingredient1 = "Bread"
 var ingredient2 = "basil"
 var ingredient3 = "Olive Oil"
 var ingredient4 = "garlic"
+var recipeBtn = document.querySelector(".recipeBtn");
+// recipeData1 stores the returned JSON from the API
+var recipeData1;
+// TODO Remove duplicate
+var output = document.querySelector(".output");
 
-// Will call API function when page loads (Uncomment Later)
-//searchRecipeByIngredients();
+// Test Link
+console.log(recipeData);
 
-// Will search for a max of 5 recipies by ingredients
+// Will search for a max of 5 recipes by ingredients
 function searchRecipeByIngredients(){
 var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
 "ingredients=" + ingredient1 + 
@@ -32,10 +37,32 @@ fetch(apiUrl, {
 // TODO: Add logic for data manipulation
 .then(function (data) {
 	console.log(apiUrl);
-    console.log(data);
+  console.log(data);
+	// set global var to JSON object
+	recipeData1 = data;
 })
 // Error handler
 .catch(function (err) {
 	console.error(err);
 });
+// TODO Uncomment when ready to go live
+//fillSuggestedRecipes();
 }
+
+function fillSuggestedRecipes (){
+	// TODO change to correct var when we finalize project
+	for (let i = 0; i < recipeData.length; i++) {
+		var title = recipeData[i].title;
+		var recipePicUrl = recipeData[i].image;
+		var img = document.createElement("img");
+		img.setAttribute("src", recipePicUrl);
+		console.log(title);
+		output.append(title);
+		output.append(img);
+	}
+}
+
+
+
+// Will change the fill suggested recipes to searchRecipeByIngredients
+recipeBtn.addEventListener("click", fillSuggestedRecipes);

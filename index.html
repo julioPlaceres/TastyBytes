@@ -80,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="field">
                     <div class="column">
                         <div class="control">
@@ -93,6 +94,19 @@
                 </div>
                 <div class="control has-text-centered mt-3">
                     <button class="button is-link is-success">Find Recipes</button>
+              </div>
+            </div>
+            <div class="field">
+              <div class="column">
+                <div class="control">
+                  <input
+                    class="input is-normal"
+                    type="text"
+                    placeholder="Example: Kale"
+                  />
+                  <div class="control has-text-centered mt-3">
+                    <button class="button is-link is-success recipeBtn">Find Recipes</button>
+                  </div>
                 </div>
             </section>
         </div>
@@ -116,6 +130,28 @@
                     </table>
                 </section>
             </div>
+
+        </section>
+      </div>
+      <div class="tile is-parent">
+        <div class="tile is-child box">
+      <!-- Table Section with API info -->
+      <section class="section output">
+      <table class="table is-bordered is-striped -isnarrow is-hoverable container">
+        <h2 id="recipe-name" class="has-text-centered">Recipe Name</h2>
+        <h3 id="description" class="has-text-centered">Recipe description</h3>
+        <h3 id="recipe-picture" class="has-text-centered">Recipe Pic/link</h3>
+
+        <thead>
+          <tr>
+            <th>Quantity</th>
+            <th>Ingredients</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+        </tbody>
+      </section>
+
         </div>
     </main>
 
