@@ -1,1 +1,7 @@
+header {
+    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
+}
 
+.logo {
+    border-radius: 40%;
+}
