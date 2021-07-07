@@ -16,16 +16,16 @@
     <header>
       <nav class="level">
           <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3">Recipies</a>
+            <a class="link is-info is-size-3" href="./index.html">Recipies</a>
           </p>
           <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3">Cocktails</a>
+            <a class="link is-info is-size-3" href="./cocktails.html">Cocktails</a>
           </p>
           <p class="level-item has-text-centered">
-          <img class="logo" src="./assets/images/Image 7-7-21 at 11.11 AM.jpg" alt="Tasty Bytes Logo">
+          <img class="logo" src="./assets/images/tasty-bytes-logo.jpg" alt="Tasty Bytes Logo">
           </p>
           <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3">GitHub</a>
+            <a class="link is-info is-size-3" href="https://github.com/julioPlaceres/TastyBytes">GitHub</a>
           </p>
           <p class="level-item has-text-centered">
             <a class="link is-info is-size-3">Contact</a>
@@ -33,90 +33,100 @@
         </nav>
   </header>
     <main class="tile is-ancestor">
-      <div class="tile is-6 is-vertical is-parent">
-        <section class="tile is-child box section" id="ingredients-list">
-            <div class="field">
-              <div class="column">
-                <label class="label">Ingredients</label>
-                <div class="control">
-                  <input
-                    class="input is-normal"
-                    type="text"
-                    placeholder="Example: Kale"
-                  />
+        <div class="tile is-6 is-vertical is-parent">
+            <section class="tile is-child box section" id="ingredients-list">
+                <div class="field">
+                    <div class="column">
+                        <label class="label">Ingredients</label>
+                        <div class="control">
+                            <input
+                                class="input is-normal"
+                                type="text"
+                                placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="field">
-              <div class="column">
-                <div class="control">
-                  <input
-                    class="input is-normal"
-                    type="text"
-                    placeholder="Example: Kale"
-                  />
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                                class="input is-normal"
+                                type="text"
+                                placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="field">
-              <div class="column">
-                <div class="control">
-                  <input
-                    class="input is-normal"
-                    type="text"
-                    placeholder="Example: Kale"
-                  />
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                            class="input is-normal"
+                            type="text"
+                            placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="field">
-              <div class="column">
-                <div class="control">
-                  <input
-                    class="input is-normal"
-                    type="text"
-                    placeholder="Example: Kale"
-                  />
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                            class="input is-normal"
+                            type="text"
+                            placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="field">
-              <div class="column">
-                <div class="control">
-                  <input
-                    class="input is-normal"
-                    type="text"
-                    placeholder="Example: Kale"
-                  />
-                  <div class="control has-text-centered mt-3">
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                            class="input is-normal"
+                            type="text"
+                            placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="control has-text-centered mt-3">
                     <button class="button is-link is-success">Find Recipes</button>
-                  </div>
                 </div>
-              </div>
-            </div>
-        </section>
-      </div>
-      <div class="tile is-parent">
-        <div class="tile is-child box">
-      <!-- Table Section with API info -->
-      <section class="section">
-      <table class="table is-bordered is-striped -isnarrow is-hoverable container">
-        <h2 id="recipe-name" class="has-text-centered">Recipe Name</h2>
-        <h3 id="description" class="has-text-centered">Recipe description</h3>
-        <h3 id="recipe-picture" class="has-text-centered">Recipe Pic/link</h3>
-
-        <thead>
-          <tr>
-            <th>Quantity</th>
-            <th>Ingredients</th>
-          </tr>
-        </thead>
-        <tbody class="table-body">
-        </tbody>
-      </section>
+            </section>
         </div>
-      </div>
+        <div class="tile is-parent">
+            <div class="tile is-child box">
+            <!-- Table Section with API info -->
+                <section class="section output">
+                    <table class="table is-bordered is-striped -isnarrow is-hoverable container is-hidden">
+                        <h2 id="recipe-name" class="has-text-centered">Recipe Name</h2>
+                        <h3 id="description" class="has-text-centered">Recipe description</h3>
+                        <h3 id="recipe-picture" class="has-text-centered">Recipe Pic/link</h3>
+    
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Ingredients</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
     </main>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Tasty Bytes</strong> by <a href="https://github.com/julioPlaceres">Julio Placeres</a>, <a href="">Casey Rowlands</a>, <a href="">Anthony Gress</a>, & <a href="">Todd Granados</a>.
+          </p>
+        </div>
+      </footer>
+
     <script src="./assets/js/recipeObjectTest.js"></script>
     <script src="./assets/js/recipes.js"></script>
   </body>

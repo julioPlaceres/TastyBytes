@@ -1,17 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-    <link rel="stylesSheetBootsrap" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="resetSheet" href="./assets/css/reset.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
     <link rel="styleSheet" href="./assets/css/style.css" />
-    <title>Document</title>
-</head>
-<body>
+    <title>Tasty Bytes</title>
+  </head>
+  <body>
+    <header>
+      <nav class="level">
+          <p class="level-item has-text-centered">
+            <a class="link is-info is-size-3" href="./index.html">Recipies</a>
+          </p>
+          <p class="level-item has-text-centered">
+            <a class="link is-info is-size-3" href="./cocktails.html">Cocktails</a>
+          </p>
+          <p class="level-item has-text-centered">
+          <img class="logo" src="./assets/images/tasty-bytes-cocktails.jpg" alt="Tasty Bytes Logo">
+          </p>
+          <p class="level-item has-text-centered">
+            <a class="link is-info is-size-3" href="https://github.com/julioPlaceres/TastyBytes">GitHub</a>
+          </p>
+          <p class="level-item has-text-centered">
+            <a class="link is-info is-size-3">Contact</a>
+          </p>
+        </nav>
+  </header>
+    <main class="tile is-ancestor">
+        <div class="tile is-6 is-vertical is-parent">
+            <section class="tile is-child box section" id="ingredients-list">
+                <div class="field">
+                    <div class="column">
+                        <label class="label">Ingredients</label>
+                        <div class="control">
+                            <input
+                                class="input is-normal"
+                                type="text"
+                                placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                                class="input is-normal"
+                                type="text"
+                                placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                            class="input is-normal"
+                            type="text"
+                            placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                            class="input is-normal"
+                            type="text"
+                            placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="column">
+                        <div class="control">
+                            <input
+                            class="input is-normal"
+                            type="text"
+                            placeholder="Example: Kale"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="control has-text-centered mt-3">
+                    <button class="button is-link is-success">Find Recipes</button>
+                </div>
+            </section>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child box">
+            <!-- Table Section with API info -->
+                <section class="section output">
+                    <table class="table is-bordered is-striped -isnarrow is-hoverable container is-hidden">
+                        <h2 id="recipe-name" class="has-text-centered">Recipe Name</h2>
+                        <h3 id="description" class="has-text-centered">Recipe description</h3>
+                        <h3 id="recipe-picture" class="has-text-centered">Recipe Pic/link</h3>
     
-</body>
-<script src="./assets/js/cocktails.js"></script>
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Ingredients</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+      
+    <script src="./assets/js/recipeObjectTest.js"></script>
+    <script src="./assets/js/recipes.js"></script>
+  </body>
 </html>
