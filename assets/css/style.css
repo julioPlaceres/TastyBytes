@@ -5,3 +5,11 @@ header {
 .logo {
     border-radius: 40%;
 }
+
+.active {
+    font-weight: bolder;
+    color: aliceblue;
+}
+.active:hover {
+    color: aliceblue;
+}
