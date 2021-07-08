@@ -6,4 +6,12 @@ header {
     border-radius: 40%;
 }
 
-/* round img corners */
+.active {
+    font-weight: bolder;
+    color: aliceblue;
+}
+
+.active:hover {
+    color: aliceblue;
+}
+
