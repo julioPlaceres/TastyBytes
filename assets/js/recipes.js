@@ -3,6 +3,9 @@ var ingredient1 = "Bread";
 var ingredient2 = "basil";
 var ingredient3 = "Olive Oil";
 var ingredient4 = "garlic";
+var recipeName = document.querySelector ("#recipe-name")
+var description = document.querySelector("#description")
+var recipeImage = document.querySelector("#recipe-picture")
 var recipeBtn = document.querySelector(".recipeBtn");
 
 // recipeData1 stores the returned JSON from the API
