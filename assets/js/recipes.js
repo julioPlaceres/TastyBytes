@@ -1,13 +1,16 @@
 // Test ingredients for API call -- Change when HTMl is completed
-var ingredient1 = "Bread"
-var ingredient2 = "basil"
-var ingredient3 = "Olive Oil"
-var ingredient4 = "garlic"
+var ingredient1 = "Bread";
+var ingredient2 = "basil";
+var ingredient3 = "Olive Oil";
+var ingredient4 = "garlic";
 var recipeBtn = document.querySelector(".recipeBtn");
+
 // recipeData1 stores the returned JSON from the API
 var recipeData1;
+
 // TODO Remove duplicate
 var output = document.querySelector(".output");
+var recipeList = document.querySelector(".recipes-list");
 
 // Test Link
 console.log(recipeData);
@@ -56,13 +59,45 @@ function fillSuggestedRecipes (){
 		var recipePicUrl = recipeData[i].image;
 		var img = document.createElement("img");
 		img.setAttribute("src", recipePicUrl);
-		console.log(title);
-		output.append(title);
-		output.append(img);
+		// Set Id attribute in order to be easier to determine which image the user clicked on
+		img.setAttribute("data-id", recipeData[i].id)
+		//console.log(title);
+		recipeList.append(title);
+		recipeList.append(img);
 	}
 }
 
+//Display recipe
+function displayRecipe(event){
+	//Check if the object clicked is an image (Work in Progress)
+	// if(event.target.tagName != "img"){
+	// 	return;
+	// }
 
+	// Get the image that got cliked
+	let imageSelected = event.target;
+	// Retrieve Data Attribute assign to image
+	let id = imageSelected.dataset.id;
+	console.log(id);
+
+	// Hide current List of recipes
+	recipeList.setAttribute("class", "is-hidden");
+
+	var recipeSelected; // Use to pass value from for loop
+
+	// Loops through the recipe object array in order to get the ID and
+	// retrive the object for the main recipe
+	for(let i = 0; i < recipeData.length; i++){
+		if(id == recipeData[i].id){
+			recipeSelected = recipeData[i];
+		}
+	}
+	// Display the title property
+	recipeName.textContent = recipeSelected.title;
+}
+
+// Get target for photo selected
+recipeList.addEventListener("click", displayRecipe);
 
 // Will change the fill suggested recipes to searchRecipeByIngredients
 recipeBtn.addEventListener("click", fillSuggestedRecipes);

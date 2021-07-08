@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="resetSheet" href="./assets/css/reset.css" />
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
     <link rel="styleSheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <title>Tasty Bytes</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
-      <nav class="level active">
-          <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3" href="./index.html">Recipies</a>
-          </p>
-          <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3" href="./cocktails.html">Cocktails</a>
-          </p>
-          <p class="level-item has-text-centered">
-          <img class="logo" src="./assets/images/tasty-bytes-logo.jpg" alt="Tasty Bytes Logo">
-          </p>
-          <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3" href="https://github.com/julioPlaceres/TastyBytes">GitHub</a>
-          </p>
-          <p class="level-item has-text-centered">
-            <a class="link is-info is-size-3">Contact</a>
-          </p>
+        <nav class="level active">
+            <p class="level-item has-text-centered">
+                <a class="link is-info is-size-3" href="./index.html">Recipies</a>
+            </p>
+            <p class="level-item has-text-centered">
+                <a class="link is-info is-size-3" href="./cocktails.html">Cocktails</a>
+            </p>
+            <p class="level-item has-text-centered">
+                <img class="logo" src="./assets/images/tasty-bytes-logo.jpg" alt="Tasty Bytes Logo">
+            </p>
+            <p class="level-item has-text-centered">
+                <a class="link is-info is-size-3" href="https://github.com/julioPlaceres/TastyBytes">GitHub</a>
+            </p>
+            <p class="level-item has-text-centered">
+                <a class="link is-info is-size-3">Contact</a>
+            </p>
         </nav>
-  </header>
+    </header>
 
     <main class="tile is-ancestor">
         <div class="tile is-6 is-vertical is-parent">
@@ -40,11 +39,7 @@
                     <div class="column">
                         <label class="label">Ingredients</label>
                         <div class="control">
-                            <input
-                                class="input is-normal"
-                                type="text"
-                                placeholder="Example: Kale"
-                            />
+                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
                         </div>
                     </div>
                 </div>
@@ -52,11 +47,7 @@
                 <div class="field">
                     <div class="column">
                         <div class="control">
-                            <input
-                                class="input is-normal"
-                                type="text"
-                                placeholder="Example: Kale"
-                            />
+                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
                         </div>
                     </div>
                 </div>
@@ -64,11 +55,7 @@
                 <div class="field">
                     <div class="column">
                         <div class="control">
-                            <input
-                            class="input is-normal"
-                            type="text"
-                            placeholder="Example: Kale"
-                            />
+                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
                         </div>
                     </div>
                 </div>
@@ -76,11 +63,7 @@
                 <div class="field">
                     <div class="column">
                         <div class="control">
-                            <input
-                            class="input is-normal"
-                            type="text"
-                            placeholder="Example: Kale"
-                            />
+                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
                         </div>
                     </div>
                 </div>
@@ -88,31 +71,27 @@
                 <div class="field">
                     <div class="column">
                         <div class="control">
-                            <input
-                            class="input is-normal"
-                            type="text"
-                            placeholder="Example: Kale"
-                            />
+                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
                         </div>
                     </div>
                 </div>
 
                 <div class="control has-text-centered mt-3">
-                    <button class="button is-link is-success">Find Recipes</button>
+                    <button class="recipeBtn button is-link is-success">Find Recipes</button>
                 </div>
             </section>
         </div>
 
         <div class="tile is-parent">
             <div class="tile is-child box">
-            <!-- Table Section with API info -->
+                <!-- Table Section with API info -->
                 <section class="section output">
                     <table class="table is-bordered is-striped -isnarrow is-hoverable container is-hidden">
 
                         <h2 id="recipe-name" class="has-text-centered">Recipe Name</h2>
                         <h3 id="description" class="has-text-centered">Recipe description</h3>
                         <h3 id="recipe-picture" class="has-text-centered">Recipe Pic/link</h3>
-    
+
                         <thead>
                             <tr>
                                 <th>Quantity</th>
@@ -122,6 +101,9 @@
 
                         <tbody class="table-body">
                         </tbody>
+                        <ul class="recipes-list">
+
+                        </ul>
                     </table>
                 </section>
             </div>
@@ -130,13 +112,17 @@
 
     <footer class="footer">
         <div class="content has-text-centered">
-          <p>
-            <strong>Tasty Bytes</strong> by <a href="https://github.com/julioPlaceres">Julio Placeres</a>, <a href="https://github.com/CaseyR1221">Casey Rowlands</a>, <a href="https://github.com/techx-guy">Anthony Gress</a>, & <a href="https://github.com/Thetodd7">Todd Granados</a>.
-          </p>
+            <p>
+                <strong>Tasty Bytes</strong> by <a href="https://github.com/julioPlaceres">Julio Placeres</a>, <a
+                    href="https://github.com/CaseyR1221">Casey Rowlands</a>, <a
+                    href="https://github.com/techx-guy">Anthony Gress</a>, & <a href="https://github.com/Thetodd7">Todd
+                    Granados</a>.
+            </p>
         </div>
     </footer>
 
     <script src="./assets/js/recipeObjectTest.js"></script>
     <script src="./assets/js/recipes.js"></script>
-  </body>
+</body>
+
 </html>
