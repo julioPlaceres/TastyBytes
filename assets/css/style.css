@@ -26,3 +26,13 @@ header {
 .column img:hover {
     cursor: pointer;
 }
+
+.fitImg {
+    align-items: center !important ;
+    border-radius: 25px;
+  }
+  .fitText {
+    align-content: center;
+    width: fit-content;
+    height: fit-content;
+  }
