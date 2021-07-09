@@ -7,14 +7,11 @@ var recipeBtn = document.querySelector(".recipeBtn");
 var addIngredientBtn = document.querySelector(".add");
 var recipeList = document.querySelector(".recipes-list");
 var output = document.querySelector(".output");
-<<<<<<< HEAD
 var searchInputEl = document.querySelector("#search-input");
 var ingredientList = document.querySelector("#ingredient-list");
 var ingredients = [];
-=======
 var ingredientsTable = document.querySelector(".table");
 var ingredientsTableBody = document.querySelector(".table-body");
->>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 // recipeData1 stores the returned JSON from the API
 //TODO rename these
 var recipeData1, nutritionData1;
@@ -97,7 +94,6 @@ function storeIngredients() {
   localStorage.setItem("ingredients", JSON.stringify(ingredients));
 }
 // Will search for a max of 5 recipes by ingredients
-<<<<<<< HEAD
 function searchRecipeByIngredients(){
 var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
 "ingredients=" + ingredient1 + 
@@ -134,10 +130,6 @@ fetch(apiUrl, {
 //fillSuggestedRecipes();
 }
 
-function fillSuggestedRecipes (){
-	//clear list
-	recipeList.innerHTML = "";
-=======
 function searchRecipeByIngredients() {
 	var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
 		"ingredients=" + ingredient1 +
@@ -175,7 +167,8 @@ function searchRecipeByIngredients() {
 }
 
 function fillSuggestedRecipes() {
->>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
+	// clear list
+	recipeList.innerHTML = "";
 	// TODO change to correct var when we finalize project
 	for (let i = 0; i < recipeData.length; i++) {
 		var title = recipeData[i].title;
@@ -197,15 +190,12 @@ function columnLayout(title, recipePicUrl, i) {
 	img.setAttribute("data-id", recipeData[i].id);
 	img.setAttribute("class", "roundedCorners mt-5");
 	// seat attribute on divs in this order for bulma css columns layout
-<<<<<<< HEAD
 	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold");
 	div2.setAttribute("class","columns");
 	div3.setAttribute("class","column");
-=======
 	div1.setAttribute("class", "column has-text-centered divLayout");
 	div2.setAttribute("class", "columns divLayout");
 	div3.setAttribute("class", "column divLayout");
->>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 	// append divs to page in the correct order
 	recipeList.append(div1);
 	div1.append(title);
@@ -218,7 +208,6 @@ function getRecipeInfo() {
 	//TODO refactor for loop through JSON array and set ID = to recipe1, recipe 2 etc.
 	let recipe1 = 560113;
 	let apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=" + recipe1 + "&includeNutrition=true";
-<<<<<<< HEAD
 //	+ "%2C" + recipe2 + 
 // "%2C" + recipe3 + 
 // "%2C" + recipe4 +  
@@ -249,7 +238,6 @@ fetch(apiUrl, {
 .catch(function (err) {
 	console.error(err);
 });
-=======
 	//	+ "%2C" + recipe2 + 
 	// "%2C" + recipe3 + 
 	// "%2C" + recipe4 +  
@@ -280,7 +268,6 @@ fetch(apiUrl, {
 		.catch(function (err) {
 			console.error(err);
 		});
->>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 }
 
 //Display recipe
