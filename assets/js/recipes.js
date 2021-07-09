@@ -265,17 +265,20 @@ function displayRecipe(event) {
 	// Create the elements needed for the display of the recipe
 	let recipeName = document.createElement("h2");
 	let recipeImage = document.createElement("img");
+	let recipeSummary = document.createElement("p");
 
 	// Assign values to the elements and format them
 	recipeName.textContent = recipeSelected.title;
 	recipeName.setAttribute("class", "has-text-centered")
 	recipeImage.setAttribute("src", recipeSelected.image);
 	recipeImage.setAttribute("class", "column");
+	recipeSummary.innerHTML = recipeInfo[0].summary;
 
 	// Select the div that will hold the recipe selected and append to page
 	let recipeSelectedDiv = document.querySelector(".recipe-selected");
 	recipeSelectedDiv.append(recipeName);
 	recipeSelectedDiv.append(recipeImage);
+	recipeSelectedDiv.append(recipeSummary);
 
 	// Removes the is-hidden class only from the selected recipe div
 	// and the ingredients list
