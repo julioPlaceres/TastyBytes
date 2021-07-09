@@ -14,3 +14,12 @@ header {
 .message-header {
     border-radius: 4px !important;
 }
+.active {
+    font-weight: bolder;
+    color: aliceblue;
+}
+
+.active:hover {
+    color: aliceblue;
+}
+

@@ -3,16 +3,18 @@ var ingredient1 = "Bread";
 var ingredient2 = "basil";
 var ingredient3 = "Olive Oil";
 var ingredient4 = "garlic";
-var recipeName = document.querySelector ("#recipe-name")
-var description = document.querySelector("#description")
-var recipeImage = document.querySelector("#recipe-picture")
 var recipeBtn = document.querySelector(".recipeBtn");
 var addIngredientBtn = document.querySelector(".add");
 var recipeList = document.querySelector(".recipes-list");
 var output = document.querySelector(".output");
+<<<<<<< HEAD
 var searchInputEl = document.querySelector("#search-input");
 var ingredientList = document.querySelector("#ingredient-list");
 var ingredients = [];
+=======
+var ingredientsTable = document.querySelector(".table");
+var ingredientsTableBody = document.querySelector(".table-body");
+>>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 // recipeData1 stores the returned JSON from the API
 //TODO rename these
 var recipeData1, nutritionData1;
@@ -95,6 +97,7 @@ function storeIngredients() {
   localStorage.setItem("ingredients", JSON.stringify(ingredients));
 }
 // Will search for a max of 5 recipes by ingredients
+<<<<<<< HEAD
 function searchRecipeByIngredients(){
 var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
 "ingredients=" + ingredient1 + 
@@ -134,17 +137,56 @@ fetch(apiUrl, {
 function fillSuggestedRecipes (){
 	//clear list
 	recipeList.innerHTML = "";
+=======
+function searchRecipeByIngredients() {
+	var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
+		"ingredients=" + ingredient1 +
+		"%2C" + ingredient2 +
+		"%2C" + ingredient3 +
+		"%2C" + ingredient4 +
+		"&number=5&ignorePantry=true&ranking=1";
+
+	fetch(apiUrl, {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-key": "9aa92d7aa7msh77d7072478c9634p1b415cjsn6487488da0d0",
+			"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+		}
+	})
+		.then(function (response) {
+			// Will return Json object if the request is successful
+			if (response.status == 200) {
+				return response.json();
+			}
+		})
+		// TODO: Add logic for data manipulation
+		.then(function (data) {
+			console.log(apiUrl);
+			console.log(data);
+			// set global var to JSON object
+			recipeData1 = data;
+		})
+		// Error handler
+		.catch(function (err) {
+			console.error(err);
+		});
+	// TODO Uncomment when ready to go live
+	//fillSuggestedRecipes();
+}
+
+function fillSuggestedRecipes() {
+>>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 	// TODO change to correct var when we finalize project
 	for (let i = 0; i < recipeData.length; i++) {
 		var title = recipeData[i].title;
 		var recipePicUrl = recipeData[i].image;
-		
+
 		columnLayout(title, recipePicUrl, i);
 	}
 }
 
 
-function columnLayout (title, recipePicUrl, i){
+function columnLayout(title, recipePicUrl, i) {
 	// create the div and img elements
 	var img = document.createElement("img");
 	var div1 = document.createElement("div");
@@ -155,9 +197,15 @@ function columnLayout (title, recipePicUrl, i){
 	img.setAttribute("data-id", recipeData[i].id);
 	img.setAttribute("class", "roundedCorners mt-5");
 	// seat attribute on divs in this order for bulma css columns layout
+<<<<<<< HEAD
 	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold");
 	div2.setAttribute("class","columns");
 	div3.setAttribute("class","column");
+=======
+	div1.setAttribute("class", "column has-text-centered divLayout");
+	div2.setAttribute("class", "columns divLayout");
+	div3.setAttribute("class", "column divLayout");
+>>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 	// append divs to page in the correct order
 	recipeList.append(div1);
 	div1.append(title);
@@ -166,10 +214,11 @@ function columnLayout (title, recipePicUrl, i){
 	div3.append(img);
 }
 
-function getRecipeInfo (){
+function getRecipeInfo() {
 	//TODO refactor for loop through JSON array and set ID = to recipe1, recipe 2 etc.
 	let recipe1 = 560113;
 	let apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=" + recipe1 + "&includeNutrition=true";
+<<<<<<< HEAD
 //	+ "%2C" + recipe2 + 
 // "%2C" + recipe3 + 
 // "%2C" + recipe4 +  
@@ -200,35 +249,128 @@ fetch(apiUrl, {
 .catch(function (err) {
 	console.error(err);
 });
+=======
+	//	+ "%2C" + recipe2 + 
+	// "%2C" + recipe3 + 
+	// "%2C" + recipe4 +  
+
+	fetch(apiUrl, {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-key": "9aa92d7aa7msh77d7072478c9634p1b415cjsn6487488da0d0",
+			"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+		}
+	})
+		.then(function (response) {
+			// Will return Json object if the request is successful
+			if (response.status == 200) {
+				console.log(response);
+				return response.json();
+			}
+		})
+		// TODO: Add logic for data manipulation
+		.then(function (data) {
+			console.log(apiUrl);
+			console.log(data);
+			// set global var to JSON object
+			nutritionData1 = data;
+			console.log(nutritionData1);
+		})
+		// Error handler
+		.catch(function (err) {
+			console.error(err);
+		});
+>>>>>>> b403cc6cc42d1a52d9747fd0552b28b5dbcf7185
 }
 
 //Display recipe
-function displayRecipe(event){
-	//Check if the object clicked is an image (Work in Progress)
-	// if(event.target.tagName != "img"){
-	// 	return;
-	// }
+function displayRecipe(event) {
+	// if the target clicked is not an image will return
+	if (event.target.tagName.toLowerCase() != "img") {
+		return;
+	}
+
+	// Removes the current List of recipes
+	document.querySelector(".recipes-list").remove();
 
 	// Get the image that got cliked
 	let imageSelected = event.target;
 	// Retrieve Data Attribute assign to image
 	let id = imageSelected.dataset.id;
-	console.log(id);
 
-	// Hide current List of recipes
-	recipeList.setAttribute("class", "is-hidden");
-
-	var recipeSelected; // Use to pass value from for loop
+	// Use to pass value from for loop and will
+	// contain the recipe selected
+	let recipeSelected;
 
 	// Loops through the recipe object array in order to get the ID and
 	// retrive the object for the main recipe
-	for(let i = 0; i < recipeData.length; i++){
-		if(id == recipeData[i].id){
+	for (let i = 0; i < recipeData.length; i++) {
+		if (id == recipeData[i].id) {
 			recipeSelected = recipeData[i];
 		}
 	}
-	// Display the title property
+
+	// Create the elements needed for the display of the recipe
+	let recipeName = document.createElement("h2");
+	let recipeImage = document.createElement("img");
+
+	// Assign values to the elements and format them
 	recipeName.textContent = recipeSelected.title;
+	recipeName.setAttribute("class", "has-text-centered")	
+	recipeImage.setAttribute("src", recipeSelected.image);
+	recipeImage.setAttribute("class", "column");
+
+	// Select the div that will hold the recipe selected and append to page
+	let recipeSelectedDiv = document.querySelector(".recipe-selected");
+	recipeSelectedDiv.append(recipeName);
+	recipeSelectedDiv.append(recipeImage);
+
+	// Removes the is-hidden class only from the selected recipe div
+	// and the ingredients list
+	recipeSelectedDiv.classList.remove("is-hidden");
+	ingredientsTable.classList.remove("is-hidden");
+
+	// Will display missed ingredients to the page (needs to be bold)
+	for (let i = 0; i < recipeSelected.missedIngredients.length; i++) {
+		// Creates a row
+		let trEl = document.createElement("tr");
+		let tdQty = document.createElement("td");
+		let tdName = document.createElement("td");
+
+		// Get values from array
+		let amount = recipeSelected.missedIngredients[i].amount;
+		let productName = recipeSelected.missedIngredients[i].name;
+
+		// Give it context and Style
+		tdQty.innerHTML = "<b>" + amount + "</b>";
+		tdName.innerHTML = "<b>" + productName + "</b>";
+
+		// Appends to Page
+		trEl.appendChild(tdQty);
+		trEl.appendChild(tdName);
+		ingredientsTableBody.appendChild(trEl);
+	}
+
+	// Will display the current used ingredients
+	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
+		// Creates a row
+		let trEl = document.createElement("tr");
+		let tdQty = document.createElement("td");
+		let tdName = document.createElement("td");
+
+		// Get values and format it
+		let amount = recipeSelected.usedIngredients[i].amount;
+		let productName = recipeSelected.usedIngredients[i].name;
+
+		// Give it context
+		tdQty.textContent = amount;
+		tdName.textContent = productName;
+
+		// Appends to Page
+		trEl.appendChild(tdQty);
+		trEl.appendChild(tdName);
+		ingredientsTableBody.appendChild(trEl);
+	}
 }
 //capitalize every word
 function capitalFormat (searchInput){
