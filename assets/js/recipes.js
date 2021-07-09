@@ -310,7 +310,7 @@ function displayRecipe(event) {
 		for (let a = 0; a < recipeInfo[0].nutrition.ingredients.length; a++) {
 			searchIndex = recipeInfo[0].nutrition.ingredients[a].name.indexOf(productName);
 			if (searchIndex != -1) {
-				ingredientIndex = searchIndex;
+				ingredientIndex = a;
 				break;
 			}
 		}
@@ -344,7 +344,7 @@ function displayRecipe(event) {
 		for (let a = 0; a < recipeInfo[0].nutrition.ingredients.length; a++) {
 			searchIndex = recipeInfo[0].nutrition.ingredients[a].name.indexOf(productName);
 			if (searchIndex != -1) {
-				ingredientIndex = searchIndex;
+				ingredientIndex = a
 				break;
 			}
 		}
@@ -360,6 +360,11 @@ function displayRecipe(event) {
 		trEl.appendChild(tdQty);
 		trEl.appendChild(tdName);
 		ingredientsTableBody.appendChild(trEl);
+	}
+
+	// Add for loop
+	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
+		// TODO : instructions (work in progress)
 	}
 }
 //capitalize every word
