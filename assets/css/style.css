@@ -1,9 +1,42 @@
+body {
+    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
+}
+
 header {
     background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
+    margin-bottom: 8.0rem;
+    max-height: 150px;
+}
+
+nav {
+    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
+    /* padding: 2rem; */
+    max-height: 100px;
+}
+
+footer {
+    margin-top: 8rem;
 }
 
 .logo {
     border-radius: 40%;
+}
+.navbar-burger {
+    align-self: center;
+    transform: scale(2.0) !important;
+}
+
+.navbar-item {
+    font-size: 1.7rem;
+    padding-right: 10.0rem !important;
+}
+
+.left-tile {
+    margin-left: 15px;
+}
+
+.right-tile {
+    margin-right: 15px;
 }
 
 /* round img corners */
@@ -14,12 +47,22 @@ header {
 .message-header {
     border-radius: 4px !important;
 }
-.active {
-    font-weight: bolder;
+
+.link:hover {
     color: aliceblue;
 }
 
-.active:hover {
-    color: aliceblue;
-}
+#logo {
+    width: 300px !important;
+    height: 100px !important;
+} 
 
+@media  screen and (max-width:768px) {
+    .left-tile {
+        margin-right: 15px;
+    }
+    
+    .right-tile {
+        margin-left: 15px;
+    }
+}
