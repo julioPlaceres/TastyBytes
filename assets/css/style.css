@@ -8,7 +8,7 @@ header {
 
 /* round img corners */
 .roundedCorners {
-    border-radius: 25px;
+    border-radius: 14px;
 }
 /* round list of ingredients  */
 .message-header {
@@ -23,3 +23,6 @@ header {
     color: aliceblue;
 }
 
+.column img:hover {
+    cursor: pointer;
+}

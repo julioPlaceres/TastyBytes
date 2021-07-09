@@ -30,9 +30,14 @@ function handleSearchInput (){
 		// clear input box
 		searchInputEl.value = "";
 		// save ingredient to the array in local storage
-		storeIngredients();
 		// show the ingredient on the page
-		appendIngredients();
+		if (ingredients.length <= 5){
+			storeIngredients();
+			appendIngredients();
+		}
+		else {
+			alert("Maximum of 5 Ingredients")
+		}
 	}
 }
 // adds ingredients to page
@@ -134,6 +139,11 @@ fetch(apiUrl, {
 function fillSuggestedRecipes() {
 	// clear list
 	recipeList.innerHTML = "";
+	// create title
+	let div1 = document.createElement("div");
+	div1.textContent = "Suggested Recipes";
+	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold box has-background-success has-text-white");
+	recipeList.append(div1);
 	// TODO change to correct var when we finalize project
 	for (let i = 0; i < recipeData.length; i++) {
 		var title = recipeData[i].title;
@@ -155,12 +165,9 @@ function columnLayout(title, recipePicUrl, i) {
 	img.setAttribute("data-id", recipeData[i].id);
 	img.setAttribute("class", "roundedCorners mt-5");
 	// seat attribute on divs in this order for bulma css columns layout
-	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold");
+	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold box has-background-success has-text-white");
 	div2.setAttribute("class","columns");
 	div3.setAttribute("class","column");
-	div1.setAttribute("class", "column has-text-centered divLayout");
-	div2.setAttribute("class", "columns divLayout");
-	div3.setAttribute("class", "column divLayout");
 	// append divs to page in the correct order
 	recipeList.append(div1);
 	div1.append(title);
