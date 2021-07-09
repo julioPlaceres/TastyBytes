@@ -6,6 +6,14 @@ header {
     border-radius: 40%;
 }
 
+/* round img corners */
+.roundedCorners {
+    border-radius: 25px;
+}
+/* round list of ingredients  */
+.message-header {
+    border-radius: 4px !important;
+}
 .active {
     font-weight: bolder;
     color: aliceblue;
