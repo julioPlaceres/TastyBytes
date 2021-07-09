@@ -41,7 +41,8 @@
                         <div class="input-container">
                             <div class="field has-addons">
                                 <p class="control is-expanded">
-                                  <input class="input" type="text" id="search-input" placeholder="Enter Ingredients">
+                                  <input class="input" type="text" id="search-input" onkeypress="return (event.charCode > 64 && 
+                                  event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" placeholder="Enter Ingredients">
                                 </p>
                                 <button class="button is-success add-container">
                                     <span class="icon is-medium add p-5">
