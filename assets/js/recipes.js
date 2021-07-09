@@ -7,9 +7,14 @@ var recipeName = document.querySelector ("#recipe-name")
 var description = document.querySelector("#description")
 var recipeImage = document.querySelector("#recipe-picture")
 var recipeBtn = document.querySelector(".recipeBtn");
+var addIngredientBtn = document.querySelector(".add");
 var recipeList = document.querySelector(".recipes-list");
 var output = document.querySelector(".output");
+var searchInputEl = document.querySelector("#search-input");
+var ingredientList = document.querySelector("#ingredient-list");
+var ingredients = [];
 // recipeData1 stores the returned JSON from the API
+//TODO rename these
 var recipeData1, nutritionData1;
 
 // Test Link
@@ -17,7 +22,78 @@ console.log("Initial API call");
 console.log(recipeData);
 console.log("Detailed recipe info");
 console.log(recipeInfo);
+function handleSearchInput (){
+	// get ingredient input value
+	let searchInputVal = searchInputEl.value.trim();
+	if (searchInputVal != ""){
+		// push ingredient to array
+		ingredients.push(searchInputVal);
+		// clear input box
+		searchInputEl.value = "";
+		// save ingredient to the array in local storage
+		storeIngredients();
+		// show the ingredient on the page
+		appendIngredients();
+	}
+}
 
+function appendIngredients(){
+	// clear list
+	ingredientList.innerHTML = "";
+	// loop through the array and put everything on the page
+	for (let i = 0; i < ingredients.length; i++) {
+		let ingredient = ingredients[i];
+		let div = document.createElement("div");
+		let header = document.createElement("div");
+		header.textContent = capitalFormat(ingredient);
+		div.setAttribute("class", "message is-success");
+		// data index so we know which one we are deleting later
+		div.setAttribute("data-index", i);
+		header.setAttribute("class", "message-header");
+		// delete button
+		let button = document.createElement("button");
+		button.setAttribute("class", "delete");
+		// append in this way makes bulma format it nicely
+		header.append(button);
+		div.append(header);
+		ingredientList.append(div);
+	}
+
+
+}
+
+function removeIngredient(event){
+	let element = event.target;
+
+  // Checks if element is a button
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the ingredient from the list
+    let index = element.parentElement.parentElement.getAttribute("data-index");
+		// delete this one ingredient that we clicked
+    ingredients.splice(index, 1);
+    // store ingredients in local storage and write to page
+    storeIngredients();
+    appendIngredients();
+
+	}
+};
+
+function onEnterKey (event){
+		if (event.key === 'Enter') {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Trigger the button element with a click
+			addIngredientBtn.click();
+			// reset input text on search
+			searchInputEl.value = "";
+		}
+		
+	};
+
+function storeIngredients() {
+  // save ingredients array to local storage
+  localStorage.setItem("ingredients", JSON.stringify(ingredients));
+}
 // Will search for a max of 5 recipes by ingredients
 function searchRecipeByIngredients(){
 var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
@@ -44,7 +120,7 @@ fetch(apiUrl, {
 .then(function (data) {
 	console.log(apiUrl);
   console.log(data);
-	// set global var to JSON object
+	// set global var to JSON object TODO rename
 	recipeData1 = data;
 })
 // Error handler
@@ -56,6 +132,8 @@ fetch(apiUrl, {
 }
 
 function fillSuggestedRecipes (){
+	//clear list
+	recipeList.innerHTML = "";
 	// TODO change to correct var when we finalize project
 	for (let i = 0; i < recipeData.length; i++) {
 		var title = recipeData[i].title;
@@ -75,8 +153,9 @@ function columnLayout (title, recipePicUrl, i){
 	// Set Id attribute in order to be easier to determine which image the user clicked on
 	img.setAttribute("src", recipePicUrl);
 	img.setAttribute("data-id", recipeData[i].id);
+	img.setAttribute("class", "roundedCorners mt-5");
 	// seat attribute on divs in this order for bulma css columns layout
-	div1.setAttribute("class","column has-text-centered");
+	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold");
 	div2.setAttribute("class","columns");
 	div3.setAttribute("class","column");
 	// append divs to page in the correct order
@@ -113,7 +192,7 @@ fetch(apiUrl, {
 .then(function (data) {
 	console.log(apiUrl);
   console.log(data);
-	// set global var to JSON object
+	// set global var to JSON object rename later
 	nutritionData1 = data;
 	console.log(nutritionData1);
 })
@@ -151,12 +230,22 @@ function displayRecipe(event){
 	// Display the title property
 	recipeName.textContent = recipeSelected.title;
 }
+//capitalize every word
+function capitalFormat (searchInput){
+	var cap = searchInput.split(" ");
+	for (let i = 0; i < cap.length; i++) {
+	 cap[i] = cap[i][0].toUpperCase() + cap[i].substr(1);
+	}
+	return(cap.join(' '));
+}
+
+// Execute a function when the user presses a key on the keyboard while typing in the searchbox
+searchInputEl.addEventListener("keyup", onEnterKey);
 
 // Get target for photo selected
 recipeList.addEventListener("click", displayRecipe);
 
 //TODO Will change the fill suggested recipes to searchRecipeByIngredients
 recipeBtn.addEventListener("click", fillSuggestedRecipes);
-
-//testing nutrition info
-//recipeBtn.addEventListener("click", getRecipeInfo);
+addIngredientBtn.addEventListener("click", handleSearchInput);
+ingredientList.addEventListener("click", removeIngredient);

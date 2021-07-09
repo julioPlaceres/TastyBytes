@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="resetSheet" href="./assets/css/reset.css" />
     <link rel="styleSheet" href="./assets/css/style.css" />
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/1e01342a2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <title>Tasty Bytes</title>
 </head>
@@ -33,54 +35,29 @@
     </header>
 
     <main class="tile is-ancestor">
-        <div class="tile is-6 is-vertical is-parent">
-            <section class="tile is-child box section" id="ingredients-list">
-                <div class="field">
+        <section class="tile is-6 is-vertical is-parent">
+            <div class="tile is-child box section" id="ingredients-list">
                     <div class="column">
-                        <label class="label">Ingredients</label>
-                        <div class="control">
-                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
-                        </div>
+                        <div class="input-container">
+                            <div class="field has-addons">
+                                <p class="control is-expanded">
+                                  <input class="input" type="text" id="search-input" placeholder="Enter Ingredients">
+                                </p>
+                                <button class="button is-success add-container">
+                                    <span class="icon is-medium add p-5">
+                                    <i class="fas fa-plus-square"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="has-text-centered is-size-4 has-text-weight-bold pt-2 pb-4">Ingredients That I Have:</div>
+                            <div id="ingredient-list"></div>
+                            <div class="has-text-centered mt-5">
+                                <button class="recipeBtn button is-link is-success">Find Recipes</button>
+                            </div>
                     </div>
                 </div>
-
-                <div class="field">
-                    <div class="column">
-                        <div class="control">
-                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="column">
-                        <div class="control">
-                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="column">
-                        <div class="control">
-                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="column">
-                        <div class="control">
-                            <input class="input is-normal" type="text" placeholder="Example: Kale" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="control has-text-centered mt-3">
-                    <button class="recipeBtn button is-link is-success">Find Recipes</button>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
         <div class="tile is-parent">
             <div class="tile is-child box">
@@ -89,7 +66,6 @@
                     <table class="table is-bordered is-striped -isnarrow is-hoverable container is-hidden">
 
                         <h2 id="recipe-name" class="has-text-centered">Recipe Name</h2>
-                        <h3 id="description" class="has-text-centered">Recipe description</h3>
                         <h3 id="recipe-picture" class="has-text-centered">Recipe Pic/link</h3>
 
                         <thead>

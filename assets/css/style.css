@@ -7,3 +7,10 @@ header {
 }
 
 /* round img corners */
+.roundedCorners {
+    border-radius: 25px;
+}
+/* round list of ingredients  */
+.message-header {
+    border-radius: 4px !important;
+}
