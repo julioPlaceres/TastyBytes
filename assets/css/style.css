@@ -41,7 +41,7 @@ footer {
 
 /* round img corners */
 .roundedCorners {
-    border-radius: 25px;
+    border-radius: 14px;
 }
 /* round list of ingredients  */
 .message-header {
@@ -51,6 +51,7 @@ footer {
 .link:hover {
     color: aliceblue;
 }
+
 
 #logo {
     width: 300px !important;
@@ -66,3 +67,18 @@ footer {
         margin-left: 15px;
     }
 }
+
+.column img:hover {
+    cursor: pointer;
+}
+
+.fitImg {
+    align-items: center !important ;
+    border-radius: 25px;
+  }
+  .fitText {
+    align-content: center;
+    width: fit-content;
+    height: fit-content;
+  }
+

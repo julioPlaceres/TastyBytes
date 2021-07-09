@@ -20,59 +20,74 @@
 
   <body>
     <header>
-        <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="" href="https://github.com/julioPlaceres/TastyBytes">
-                    <img
-                    id="logo"
-                    src="./assets/images/tasty-bytes-logo.jpg"
-                    alt="tasty-bytes-logo"
-                </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
+      <nav
+        class="navbar is-transparent"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand">
+          <a class="" href="https://github.com/julioPlaceres/TastyBytes">
+            <img id="logo" src="./assets/images/tasty-bytes-logo.jpg"
+            alt="tasty-bytes-logo"
+          </a>
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
 
-            <div class="navbar-menu">
-                <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-                    <a class="navbar-item" href="./index.html"><span class="link">Recipes</span></a>
-                    <a class="navbar-item" href="./cocktails.html"><span class="link">Cocktails</span></a>
+        <div class="navbar-menu">
+          <div
+            class="navbar-start"
+            style="flex-grow: 1; justify-content: center"
+          >
+            <a class="navbar-item" href="./index.html"
+              ><span class="link">Recipes</span></a
+            >
+            <a class="navbar-item" href="./cocktails.html"
+              ><span class="link">Cocktails</span></a
+            >
 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            <span class="link">Github</span>
-                        </a>
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item" href="https://github.com/julioPlaceres/TastyBytes">
-                                TastyBytes
-                            </a>
-                            <a class="navbar-item" href="https://github.com/CaseyR1221">
-                                Casey
-                            </a>
-                            <a class="navbar-item" href="https://github.com/Thetodd7">
-                                Todd
-                            </a>
-                            <a class="navbar-item" href="https://github.com/techx-guy">
-                                Anthony
-                            </a>
-                            <a class="navbar-item" href="https://github.com/julioPlaceres">
-                                Julio 
-                            </a>
-                            <hr class="navbar-divider">
-                            <a class="navbar-item">
-                              Report an issue
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <span class="link">Github</span>
+              </a>
+              <div class="navbar-dropdown">
+                <a
+                  class="navbar-item"
+                  href="https://github.com/julioPlaceres/TastyBytes"
+                >
+                  TastyBytes
+                </a>
+                <a class="navbar-item" href="https://github.com/CaseyR1221">
+                  Casey
+                </a>
+                <a class="navbar-item" href="https://github.com/Thetodd7">
+                  Todd
+                </a>
+                <a class="navbar-item" href="https://github.com/techx-guy">
+                  Anthony
+                </a>
+                <a class="navbar-item" href="https://github.com/julioPlaceres">
+                  Julio
+                </a>
+                <hr class="navbar-divider" />
+                <a class="navbar-item"> Report an issue </a>
+              </div>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <main class="tile is-ancestor">
-      <section class="tile is-6 is-vertical is-parent left-tile">
+      <section class="tile is-6 is-vertical is-parent">
         <div class="tile is-child box section" id="ingredients-list">
           <div class="column">
             <div class="input-container">
@@ -82,6 +97,8 @@
                     class="input"
                     type="text"
                     id="search-input"
+                    onkeypress="return (event.charCode > 64 && 
+                                  event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
                     placeholder="Enter Ingredients"
                   />
                 </p>
