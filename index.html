@@ -28,7 +28,7 @@
         <div class="navbar-brand">
           <a class="" href="https://github.com/julioPlaceres/TastyBytes">
             <img id="logo" src="./assets/images/tasty-bytes-logo.jpg"
-            alt="tasty-bytes-logo"
+            alt="tasty-bytes-logo">
           </a>
           <a
             role="button"
@@ -87,7 +87,7 @@
       </nav>
     </header>
 
-    <div class="is-fullheight-100vh">
+    <div class="">
       <main class="tile is-ancestor">
         <section class="tile is-6 is-vertical is-parent left-tile">
           <div class="tile is-child box section" id="ingredients-list">
@@ -136,35 +136,17 @@
           <div class="tile is-child box">
             <!-- Table Section with API info -->
             <section class="section output">
-              <table
-                class="
-                  table
-                  is-bordered is-striped
-                  is-narrow
-                  is-hoverable
-                  is-fullwidth
-                  container
-                  is-hidden
-                "
+              
+              <div
+              class="
+              recipe-selected
+              columns
+              is-flex-direction-column is-hidden
+              "
               >
-                <div
-                  class="
-                    recipe-selected
-                    columns
-                    is-flex-direction-column is-hidden
-                  "
-                ></div>
-
-                <thead>
-                  <tr>
-                    <th>Quantity</th>
-                    <th>Ingredients</th>
-                  </tr>
-                </thead>
-
-                <tbody class="table-body"></tbody>
+            </div>
+              
                 <div class="recipes-list columns is-flex-direction-column"></div>
-              </table>
             </section>
           </div>
         </div>
@@ -186,8 +168,8 @@
     <script src="./assets/js/detailedRecipeInfo.js"></script>
     <script src="./assets/js/recipeObjectTest.js"></script>
     <script src="./assets/js/menu-toggle.js"></script>
-    <script src="./assets/js/recipes.js"></script>
     <script src="./assets/js/backBtn.js"></script>
+    <script src="./assets/js/recipes.js"></script>
     <script src="./assets/js/displayRecipe.js"></script>
   </body>
 </html>
