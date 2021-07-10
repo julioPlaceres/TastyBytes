@@ -14,7 +14,8 @@ var ingredientsTable = document.querySelector(".table");
 var ingredientsTableBody = document.querySelector(".table-body");
 // recipeData1 stores the returned JSON from the API
 //TODO change to real variables when going live
-var recipeData;
+var recipeData, apiData;
+getRecipeInfo(560113);
 
 // Test Link
 console.log("Initial API call");
@@ -206,9 +207,9 @@ function getRecipeInfo(recipeId) {
 		.then(function (data) {
 			console.log(data);
 			// set global var to store detailed data
-			let recipeInfo = data;
-			console.log(recipeInfo);
-			return(recipeInfo);
+			apiData = data;
+			console.log(apiData);
+			return(apiData);
 		})
 		// Error handler
 		.catch(function (err) {
@@ -365,3 +366,5 @@ searchInputEl.addEventListener("keyup", onEnterKey);
 recipeBtn.addEventListener("click", fillSuggestedRecipes);
 addIngredientBtn.addEventListener("click", handleSearchInput);
 ingredientList.addEventListener("click", removeIngredient);
+// Event listener for back button
+output.addEventListener("click", goBack)

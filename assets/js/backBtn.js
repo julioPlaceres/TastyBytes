@@ -29,5 +29,3 @@ function goBack (event){
   }
 }
 
-// Event listener for back button
-output.addEventListener("click", goBack)
