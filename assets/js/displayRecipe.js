@@ -17,6 +17,8 @@ function displayRecipe(event) {
 		return;
 	}
 
+	createBackBtn();
+
 	// Removes the current List of recipes and shows the recipe Selected
 	recipeListEl.classList.add("is-hidden");
 	recipeSelectedEl.classList.remove("is-hidden");
@@ -42,15 +44,16 @@ function displayRecipe(event) {
 
 	// Assign values to the elements and format them
 	recipeName.textContent = recipeSelected.title;
-	recipeName.setAttribute("class", "has-text-centered")
-	imageHolder.setAttribute("class", "column");
+	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
+	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners");
 	recipeImage.setAttribute("src", recipeSelected.image);
-	recipeImage.setAttribute("class", "column");
+	recipeImage.setAttribute("class", "column roundedCorners");
+	recipeSummary.setAttribute("class", "mb-5");
 	recipeSummary.innerHTML = recipeInfo[0].summary;
 
 	// Select the div that will hold the recipe selected and append to page
+	imageHolder.append(recipeName);
 	imageHolder.append(recipeImage);
-	recipeSelectedEl.append(recipeName);
 	recipeSelectedEl.append(imageHolder);
 	recipeSelectedEl.append(recipeSummary);
 
@@ -86,7 +89,6 @@ function displayRecipe(event) {
 
 		// creates table and back button
 		createIngredientsTable();
-		createBackBtn();
 
 		// Appends to Page
 		trEl.appendChild(tdQty);
@@ -143,7 +145,7 @@ function createIngredientsTable() {
 	ingredientsTbodyEl = document.createElement("tbody");
 
 	//Asigns values and formatting
-	ingredientsTableEl.setAttribute("class", "table is-bordered is-striped -isnarrow is-hoverable container");
+	ingredientsTableEl.setAttribute("class", "table is-bordered is-striped -isnarrow is-hoverable container mb-3");
 	ingredientsTbodyEl.setAttribute("class", "table-body");
 	ingredientsThQtyEl.textContent = "Quantity";
 	ingredientsThIngEl.textContent = "Ingredients";
@@ -165,7 +167,7 @@ function createBackBtn() {
 	// set class for bulma and font awesome icon
 	btnSpan.setAttribute("class", "icon is-medium");
 	backBtn.setAttribute("class", "button is-success backBtn");
-	backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -3rem;");
+	backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -2rem; max-width: 6rem;");
 	icon.setAttribute("class", "fas fa-chevron-left");
 	innerSpan.textContent = "Back"
 	// append back button to the right tile
