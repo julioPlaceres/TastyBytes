@@ -15,7 +15,7 @@ var ingredientsTableBody = document.querySelector(".table-body");
 // recipeData1 stores the returned JSON from the API
 //TODO change to real variables when going live
 var recipeData, apiData;
-getRecipeInfo(560113);
+//getRecipeInfo(560113);
 
 // Test Link
 console.log("Initial API call");

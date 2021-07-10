@@ -130,10 +130,7 @@ function displayRecipe(event) {
 		ingredientsTbodyEl.appendChild(trEl);
 	}
 
-	// Add for loop
-	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
-		// TODO : instructions (work in progress)
-	}
+	displayPrepInstructions();
 }
 
 function createIngredientsTable() {
@@ -156,6 +153,26 @@ function createIngredientsTable() {
 	ingredientsTableEl.append(ingredientsTrThEl);
 	ingredientsTableEl.append(ingredientsTbodyEl);
 	recipeSelectedEl.append(ingredientsTableEl);
+}
+
+function displayPrepInstructions(){
+	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
+		// Adds Coocking instructions to the Page
+		let ulEl = document.querySelector(".recipe-instructions");
+		let ilEl = document.createElement("il");
+
+		// Assign values to the elements and format them
+		ilEl.textContent = "test test";
+		ilEl.setAttribute("class", "has-text-centered")
+
+		// Select the div that will hold the recipe selected and append to page
+		ulEl.append(ilEl);
+
+		// Removes the is-hidden class only from the selected recipe div
+		// and the ingredients list
+		ulEl.classList.remove("is-hidden");
+		//ingredientsTable.classList.remove("is-hidden");
+	}
 }
 
 function createBackBtn() {
