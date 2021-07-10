@@ -3,10 +3,9 @@ var outputDivEl = document.querySelector(".output");
 var recipeListEl = document.querySelector(".recipes-list");
 var recipeSelectedEl = document.querySelector(".recipe-selected");
 var ingredientsTableEl;
-var ingredientsTrThEl;
-var ingredientsThQtyEl;
-var ingredientsThIngEl;
 var ingredientsTbodyEl;
+var nutritionTableEl;
+var nutritionTbodyEl;
 var recipeSelected;
 var idSelected;
 
@@ -133,18 +132,28 @@ function displayRecipe(event) {
 	}
 
 	displayPrepInstructions();
+	createNutritionTable();
+
+	// Nutrition info
+	displayNutritionInfo("Calories");
+	displayNutritionInfo("Sugar");
+	displayNutritionInfo("Fat");
+	displayNutritionInfo("Protein");
+	
+	// Additional nutrition
+	
 }
 
 function createIngredientsTable() {
 	// Creates Table elements
 	ingredientsTableEl = document.createElement("table");
-	ingredientsTrThEl = document.createElement("tr");
-	ingredientsThQtyEl = document.createElement("th");
-	ingredientsThIngEl = document.createElement("th");
+	let ingredientsTrThEl = document.createElement("tr");
+	let ingredientsThQtyEl = document.createElement("th");
+	let ingredientsThIngEl = document.createElement("th");
 	ingredientsTbodyEl = document.createElement("tbody");
 
 	//Asigns values and formatting
-	ingredientsTableEl.setAttribute("class", "table is-bordered is-striped -isnarrow is-hoverable container mb-3");
+	ingredientsTableEl.setAttribute("class", "ingredients table is-bordered is-striped -isnarrow is-hoverable container mb-3");
 	ingredientsTbodyEl.setAttribute("class", "table-body");
 	ingredientsThQtyEl.textContent = "Quantity";
 	ingredientsThIngEl.textContent = "Ingredients";
@@ -179,6 +188,7 @@ function displayPrepInstructions(){
 	"Ready in Mins: <b>" + readyIn + "</b> " +
 	"Servings: <b>" + servins + "</b> " +
 	"Cooking Mins: <b>" + cookingMins + "</b>";
+	stepsEl.setAttribute("class", "instruction-section");
 	stepsHeaderEl.setAttribute("class", "instruction-header has-text-centered mb-3");
 	stepsBodyEl.setAttribute("class", "instruction-body has-text-left")
 	stepHeader.setAttribute("class", "is-size-5 is-underlined has-text-weight-semibold");
@@ -207,6 +217,62 @@ function displayPrepInstructions(){
 		stepsBodyEl.append(instructionsUlEl);
 		stepsEl.append(stepsBodyEl);
 	}
+}
+
+function createNutritionTable() {
+	// Creates Table elements
+	nutritionTableEl = document.createElement("table");
+	let nutritionTrThEl = document.createElement("tr");
+	let nutritionThNameEl = document.createElement("th");
+	let nutritionThAmmountEl = document.createElement("th");
+	let nutritionThUnitEl = document.createElement("th");
+	nutritionTbodyEl = document.createElement("tbody");
+
+	//Asigns values and formatting
+	nutritionTableEl.setAttribute("class", "nutrients table is-bordered is-striped -isnarrow is-hoverable container mt-3");
+	nutritionTbodyEl.setAttribute("class", "table-body");
+	nutritionThNameEl.textContent = "Name";
+	nutritionThAmmountEl.textContent = "ammount";
+	nutritionThUnitEl.textContent = "unit";
+
+	// Append to page
+	nutritionTrThEl.append(nutritionThNameEl);
+	nutritionTrThEl.append(nutritionThAmmountEl);
+	nutritionTrThEl.append(nutritionThUnitEl);
+	nutritionTableEl.append(nutritionTrThEl);
+	nutritionTableEl.append(nutritionTbodyEl);
+	recipeSelectedEl.append(nutritionTableEl);
+}
+
+// Will create a table row with all needed information and appended on table nutrients
+function displayNutritionInfo(nutrientName){
+	// Create Row Elements
+	let elementRow = document.createElement("tr");
+	let elementName = document.createElement("td");
+	let elementAmmount = document.createElement("td");
+	let elementUnit = document.createElement("td");
+	
+	// Get nutrients array
+	let nutrients = recipeInfo[0].nutrition.nutrients;
+
+	// Loop through and find name index
+	let nutrientIndex;
+	for(let i = 0; i < nutrients.length; i++){
+		if(nutrientName == nutrients[i].name){
+			nutrientIndex = i;
+		}
+	}
+
+	// Create Table Row
+	elementName.textContent = nutrients[nutrientIndex].name;
+	elementAmmount.textContent = nutrients[nutrientIndex].amount;
+	elementUnit.textContent = nutrients[nutrientIndex].unit;
+
+	// Append to table
+	elementRow.append(elementName);
+	elementRow.append(elementAmmount);
+	elementRow.append(elementUnit);
+	nutritionTbodyEl.append(elementRow);
 }
 
 function createBackBtn() {
