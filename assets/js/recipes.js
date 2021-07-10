@@ -15,7 +15,7 @@ var ingredientsTableBody = document.querySelector(".table-body");
 // recipeData1 stores the returned JSON from the API
 //TODO change to real variables when going live
 var recipeData, apiData;
-getRecipeInfo(560113);
+//getRecipeInfo(560113);
 
 // Test Link
 console.log("Initial API call");
@@ -128,7 +128,7 @@ function searchRecipeByIngredients() {
 		// TODO: Add logic for data manipulation
 		.then(function (data) {
 			// set global var to JSON object TODO rename
-			recipeData = data;
+					recipeData = data;
 			console.log(recipeData);
 			fillSuggestedRecipes(recipeData);
 		})
@@ -139,13 +139,10 @@ function searchRecipeByIngredients() {
 }
 //TODO when going live, pass in recipeData
 function fillSuggestedRecipes() {
-	if (recipeList.classList.contains("is-hidden")){
-		recipeList.classList.remove("is-hidden");
-		let recipeSelected = document.querySelector(".recipe-selected");
-		recipeSelected.classList.add("is-hidden");
-	}
+	unhideRecipeList();
 	// clear list
 	recipeList.innerHTML = "";
+	createBackBtnSuggested();
 	// create title
 	let div1 = document.createElement("div");
 	div1.textContent = "Suggested Recipes";
@@ -157,6 +154,57 @@ function fillSuggestedRecipes() {
 		var recipePicUrl = recipeData[i].image;
 
 		columnLayout(title, recipePicUrl, i);
+	}
+	hideTile1();
+}
+
+function unhideRecipeList (){
+	let tile2 = document.querySelector(".right-tile");
+	// check if suggested list was hidden by selected recipe
+	if (recipeList.classList.contains("is-hidden")){
+		recipeList.classList.remove("is-hidden");
+		let recipeSelected = document.querySelector(".recipe-selected");
+		recipeSelected.classList.add("is-hidden");
+	}
+	// if tile 2 is hidden, unhide it
+	else if (tile2.classList.contains("is-hidden")){
+		tile2.classList.remove("is-hidden")
+	}
+}
+
+function hideTile1 (){
+	let tile1 = document.querySelector(".left-tile");
+	if (tile1.classList.contains("is-hidden") == false){
+		tile1.classList.add("is-hidden");
+	}
+
+}
+
+function createBackBtnSuggested (){
+  //create btn elements
+  let btnSpan = document.createElement("span");
+  let innerSpan = document.createElement("span");
+  let backBtn = document.createElement("button");
+  let icon = document.createElement("i");
+  // set class for bulma and font awesome icon
+  btnSpan.setAttribute("class", "icon is-medium");
+  backBtn.setAttribute("class", "button is-success backBtn");
+  backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -2rem; margin-bottom: 1rem; max-width: 6rem;");
+  icon.setAttribute("class", "fas fa-chevron-left");
+  innerSpan.textContent = "Back"
+  // append back button to the right tile
+  backBtn.append(btnSpan);
+  backBtn.append(innerSpan);
+  btnSpan.append(icon);
+  recipeList.append(backBtn);
+}
+
+function goBackIng (event){
+	let tile1 = document.querySelector(".left-tile");
+	let tile2 = document.querySelector(".right-tile");
+	if (tile1.classList.contains("is-hidden")){
+		tile1.classList.remove("is-hidden");
+		tile2.classList.add("is-hidden");
 	}
 }
 
@@ -207,6 +255,8 @@ function getRecipeInfo(recipeId) {
 		.then(function (data) {
 			console.log(data);
 			// set global var to store detailed data
+			//TODO have selected recipe call the api response only
+			//then, here in the .then, call the rest of the function passing in the data from the API
 			apiData = data;
 			console.log(apiData);
 			return(apiData);
@@ -367,4 +417,4 @@ recipeBtn.addEventListener("click", fillSuggestedRecipes);
 addIngredientBtn.addEventListener("click", handleSearchInput);
 ingredientList.addEventListener("click", removeIngredient);
 // Event listener for back button
-output.addEventListener("click", goBack)
+recipeList.addEventListener("click", goBackIng)
