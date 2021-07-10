@@ -10,6 +10,8 @@ var ingredientsTbodyEl;
 var recipeSelected;
 var idSelected;
 
+console.log(recipeInfo);
+
 // Displays information of the selected recipe on the screen
 function displayRecipe(event) {
 	// if the target clicked is not an image will return
@@ -156,22 +158,22 @@ function createIngredientsTable() {
 }
 
 function displayPrepInstructions(){
-	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
-		// Adds Coocking instructions to the Page
-		let ulEl = document.querySelector(".recipe-instructions");
-		let ilEl = document.createElement("il");
+	for (let i = 0; i < recipeInfo[0].analyzedInstructions[0].steps.length; i++) {
+		// Get instruction, step No and description
+		let instructionSteps = recipeInfo[0].analyzedInstructions[0].steps;
+		let stepNo = instructionSteps[i].number;
+		let description = instructionSteps[i].step;
+
+		// Create the elements for the list
+		let instructionsUlEl = document.createElement("ul");
+		let instructionsIlEl = document.createElement("il");
 
 		// Assign values to the elements and format them
-		ilEl.textContent = "test test";
-		ilEl.setAttribute("class", "has-text-centered")
+		instructionsIlEl.textContent = stepNo + " - " + description;
 
-		// Select the div that will hold the recipe selected and append to page
-		ulEl.append(ilEl);
-
-		// Removes the is-hidden class only from the selected recipe div
-		// and the ingredients list
-		ulEl.classList.remove("is-hidden");
-		//ingredientsTable.classList.remove("is-hidden");
+		// Append them to the page
+		instructionsUlEl.append(instructionsIlEl);
+		recipeSelectedEl.append(instructionsUlEl);
 	}
 }
 
