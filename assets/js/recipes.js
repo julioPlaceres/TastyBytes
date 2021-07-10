@@ -138,6 +138,11 @@ function searchRecipeByIngredients() {
 }
 //TODO when going live, pass in recipeData
 function fillSuggestedRecipes() {
+	if (recipeList.classList.contains("is-hidden")){
+		recipeList.classList.remove("is-hidden");
+		let recipeSelected = document.querySelector(".recipe-selected");
+		recipeSelected.classList.add("is-hidden");
+	}
 	// clear list
 	recipeList.innerHTML = "";
 	// create title
