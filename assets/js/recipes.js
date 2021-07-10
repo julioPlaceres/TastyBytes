@@ -423,3 +423,4 @@ addIngredientBtn.addEventListener("click", handleSearchInput);
 ingredientList.addEventListener("click", removeIngredient);
 // Event listener for back button
 recipeList.addEventListener("click", goBackIng)
+//output.addEventListener("click", goBack)
