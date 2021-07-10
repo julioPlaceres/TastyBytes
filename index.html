@@ -32,6 +32,7 @@
           </a>
           <a
             role="button"
+            id="burger"
             class="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
@@ -42,7 +43,7 @@
           </a>
         </div>
 
-        <div class="navbar-menu">
+        <div id="nav-links" class="navbar-menu">
           <div
             class="navbar-start"
             style="flex-grow: 1; justify-content: center"
@@ -58,7 +59,7 @@
               <a class="navbar-link">
                 <span class="link">Github</span>
               </a>
-              <div class="navbar-dropdown">
+              <div class="navbar-dropdown is-hidden">
                 <a
                   class="navbar-item"
                   href="https://github.com/julioPlaceres/TastyBytes"
@@ -86,86 +87,89 @@
       </nav>
     </header>
 
-    <main class="tile is-ancestor">
-      <section class="tile is-6 is-vertical is-parent">
-        <div class="tile is-child box section" id="ingredients-list">
-          <div class="column">
-            <div class="input-container">
-              <div class="field has-addons">
-                <p class="control is-expanded">
-                  <input
-                    class="input"
-                    type="text"
-                    id="search-input"
-                    onkeypress="return (event.charCode > 64 && 
+    <div class="is-fullheight-100vh">
+      <main class="tile is-ancestor">
+        <section class="tile is-6 is-vertical is-parent left-tile">
+          <div class="tile is-child box section" id="ingredients-list">
+            <div class="column">
+              <div class="input-container">
+                <div class="field has-addons">
+                  <p class="control is-expanded">
+                    <input
+                      class="input"
+                      type="text"
+                      id="search-input"
+                      onkeypress="return (event.charCode > 64 && 
                                   event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
-                    placeholder="Enter Ingredients"
-                  />
-                </p>
-                <button class="button is-success add-container">
-                  <span class="icon is-medium add p-5">
-                    <i class="fas fa-plus-square"></i>
-                  </span>
-                </button>
-              </div>
-              <div
-                class="
-                  has-text-centered
-                  is-size-4
-                  has-text-weight-bold
-                  pt-2
-                  pb-4
-                "
-              >
-                Ingredients That I Have:
-              </div>
-              <div id="ingredient-list"></div>
-              <div class="has-text-centered mt-5">
-                <button class="recipeBtn button is-link is-success">
-                  Find Recipes
-                </button>
+                      placeholder="Enter Ingredients"
+                    />
+                  </p>
+                  <button class="button is-success add-container">
+                    <span class="icon is-medium add p-5">
+                      <i class="fas fa-plus-square"></i>
+                    </span>
+                  </button>
+                </div>
+                <div
+                  class="
+                    has-text-centered
+                    is-size-4
+                    has-text-weight-bold
+                    pt-2
+                    pb-4
+                  "
+                >
+                  Ingredients That I Have:
+                </div>
+                <div id="ingredient-list"></div>
+                <div class="has-text-centered mt-5">
+                  <button class="recipeBtn button is-link is-success">
+                    Find Recipes
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div class="tile is-parent right-tile">
-        <div class="tile is-child box">
-          <!-- Table Section with API info -->
-          <section class="section output">
-            <table
-              class="
-                table
-                is-bordered is-striped
-                -isnarrow
-                is-hoverable
-                container
-                is-hidden
-              "
-            >
-              <div
+        <div class="tile is-parent right-tile">
+          <div class="tile is-child box">
+            <!-- Table Section with API info -->
+            <section class="section output">
+              <table
                 class="
-                  recipe-selected
-                  columns
-                  is-flex-direction-column is-hidden
+                  table
+                  is-bordered is-striped
+                  is-narrow
+                  is-hoverable
+                  is-fullwidth
+                  container
+                  is-hidden
                 "
-              ></div>
+              >
+                <div
+                  class="
+                    recipe-selected
+                    columns
+                    is-flex-direction-column is-hidden
+                  "
+                ></div>
 
-              <thead>
-                <tr>
-                  <th>Quantity</th>
-                  <th>Ingredients</th>
-                </tr>
-              </thead>
+                <thead>
+                  <tr>
+                    <th>Quantity</th>
+                    <th>Ingredients</th>
+                  </tr>
+                </thead>
 
-              <tbody class="table-body"></tbody>
-              <div class="recipes-list columns is-flex-direction-column"></div>
-            </table>
-          </section>
+                <tbody class="table-body"></tbody>
+                <div class="recipes-list columns is-flex-direction-column"></div>
+              </table>
+            </section>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
 
     <footer class="footer">
       <div class="content has-text-centered">
@@ -181,6 +185,7 @@
 
     <script src="./assets/js/detailedRecipeInfo.js"></script>
     <script src="./assets/js/recipeObjectTest.js"></script>
+    <script src="./assets/js/menu-toggle.js"></script>
     <script src="./assets/js/recipes.js"></script>
     <script src="./assets/js/displayRecipe.js"></script>
   </body>
