@@ -18,12 +18,17 @@ footer {
     margin-top: 8rem;
 }
 
+.is-fullheight-100vh {
+    height: 100vh;
+}
+
 .logo {
     border-radius: 40%;
 }
 .navbar-burger {
     align-self: center;
     transform: scale(2.0) !important;
+    margin-right: 20px !important; 
 }
 
 .navbar-item {
@@ -48,10 +53,18 @@ footer {
     border-radius: 4px !important;
 }
 
-.link:hover {
+/* .link:hover {
     color: aliceblue;
-}
+} */
 
+.fitImg {
+    align-self: center;
+    border-radius: 25px;
+    padding: 15px;
+   }
+.fitText {
+     align-content: center;
+   }
 
 #logo {
     width: 300px !important;
@@ -72,13 +85,4 @@ footer {
     cursor: pointer;
 }
 
-.fitImg {
-    align-items: center !important ;
-    border-radius: 25px;
-  }
-  .fitText {
-    align-content: center;
-    width: fit-content;
-    height: fit-content;
-  }
 
