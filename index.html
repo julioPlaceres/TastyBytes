@@ -136,25 +136,24 @@
           <div class="tile is-child box">
             <!-- Table Section with API info -->
             <section class="section output">
-              <table
-                class="
-                  table
-                  is-bordered is-striped
-                  is-narrow
-                  is-hoverable
-                  is-fullwidth
-                  container
-                  is-hidden
-                "
+              class="
+              table
+              is-bordered is-striped
+              is-narrow
+              is-hoverable
+              is-fullwidth
+              container
+              is-hidden
+              "
+              
+              <div
+              class="
+              recipe-selected
+              columns
+              is-flex-direction-column is-hidden
+              "
               >
-                <div
-                  class="
-                    recipe-selected
-                    columns
-                    is-flex-direction-column is-hidden
-                  "
-                ></div>
-
+              <table>
                 <thead>
                   <tr>
                     <th>Quantity</th>
@@ -163,8 +162,10 @@
                 </thead>
 
                 <tbody class="table-body"></tbody>
-                <div class="recipes-list columns is-flex-direction-column"></div>
               </table>
+            </div>
+              
+                <div class="recipes-list columns is-flex-direction-column"></div>
             </section>
           </div>
         </div>
