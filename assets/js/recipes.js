@@ -202,10 +202,15 @@ function createBackBtnSuggested (){
 function goBackIng (event){
 	let tile1 = document.querySelector(".left-tile");
 	let tile2 = document.querySelector(".right-tile");
-	if (tile1.classList.contains("is-hidden")){
-		tile1.classList.remove("is-hidden");
-		tile2.classList.add("is-hidden");
-	}
+	let clickTag = event.target.tagName.toLowerCase();
+  // if user clicked the button
+  if (clickTag == "button" || clickTag == "span" || clickTag =="i"){
+		if (tile1.classList.contains("is-hidden")){
+			// hide tile 2 and show tile 1
+			tile1.classList.remove("is-hidden");
+			tile2.classList.add("is-hidden");
+		}
+  }
 }
 
 
