@@ -130,10 +130,6 @@ function searchRecipeByIngredients() {
 			recipeData = data;
 			console.log(recipeData);
 			fillSuggestedRecipes(recipeData);
-			for (let i = 0; i < recipeData.length; i++) {
-				const element = recipeData[i];
-				
-			}
 		})
 		// Error handler
 		.catch(function (err) {
