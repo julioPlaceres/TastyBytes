@@ -158,6 +158,37 @@ function createIngredientsTable() {
 }
 
 function displayPrepInstructions(){
+	//Create elements for the header of Steps section
+	let stepsEl = document.createElement("div");
+	let stepsHeaderEl = document.createElement("div");
+	let stepsBodyEl = document.createElement("div");
+	let stepHeader = document.createElement("h3");
+	let prepInfo = document.createElement("p");
+	let prepMins;
+	let readyIn;
+	let servins;
+	let cookingMins;
+
+	// Give it properties and style
+	stepHeader.textContent = "Instruction Steps";
+	prepMins = recipeInfo[0].preparationMinutes;
+	readyIn = recipeInfo[0].readyInMinutes;
+	servins = recipeInfo[0].servings;
+	cookingMins = recipeInfo[0].cookingMinutes;
+	prepInfo.innerHTML = "Prep Mins: <b>" + prepMins + "</b> " +
+	"Ready in Mins: <b>" + readyIn + "</b> " +
+	"Servings: <b>" + servins + "</b> " +
+	"Cooking Mins: <b>" + cookingMins + "</b>";
+	stepsHeaderEl.setAttribute("class", "instruction-header has-text-centered mb-3");
+	stepsBodyEl.setAttribute("class", "instruction-body has-text-left")
+	stepHeader.setAttribute("class", "is-size-5 is-underlined has-text-weight-semibold");
+	
+	// Append to page
+	stepsHeaderEl.append(stepHeader);
+	stepsHeaderEl.append(prepInfo);
+	stepsEl.append(stepsHeaderEl);
+	recipeSelectedEl.append(stepsEl);
+
 	for (let i = 0; i < recipeInfo[0].analyzedInstructions[0].steps.length; i++) {
 		// Get instruction, step No and description
 		let instructionSteps = recipeInfo[0].analyzedInstructions[0].steps;
@@ -173,7 +204,8 @@ function displayPrepInstructions(){
 
 		// Append them to the page
 		instructionsUlEl.append(instructionsIlEl);
-		recipeSelectedEl.append(instructionsUlEl);
+		stepsBodyEl.append(instructionsUlEl);
+		stepsEl.append(stepsBodyEl);
 	}
 }
 
