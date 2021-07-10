@@ -13,14 +13,14 @@ var ingredients = [];
 var ingredientsTable = document.querySelector(".table");
 var ingredientsTableBody = document.querySelector(".table-body");
 // recipeData1 stores the returned JSON from the API
-//TODO rename these
-var recipeData1, nutritionData1;
+//TODO change to real variables when going live
+var recipeData;
 
 // Test Link
 console.log("Initial API call");
 console.log(recipeData);
 console.log("Detailed recipe info");
-console.log(recipeInfo);
+// console.log(recipeInfo);
 function handleSearchInput() {
 	// get ingredient input value
 	let searchInputVal = searchInputEl.value.trim();
@@ -101,13 +101,16 @@ function storeIngredients() {
 
 // Will search for a max of 5 recipes by ingredients
 function searchRecipeByIngredients() {
-	var apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?" +
-		"ingredients=" + ingredient1 +
-		"%2C" + ingredient2 +
-		"%2C" + ingredient3 +
-		"%2C" + ingredient4 +
-		"&number=5&ignorePantry=true&ranking=1";
-
+	//function to create the url based on what is in the ingredients array
+		let apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=";
+		// loop through array of ingredients, add them to the url in the proper way
+		for (let i = 0; i < ingredients.length; i++) {
+			apiUrl += "%2C" + ingredients[i];
+		}
+		// add the tail of the url after ingredients
+		apiUrl += "&number=5&ignorePantry=true&ranking=1";
+		// output the url for fetch request
+		console.log(apiUrl);
 	fetch(apiUrl, {
 		"method": "GET",
 		"headers": {
@@ -123,19 +126,21 @@ function searchRecipeByIngredients() {
 		})
 		// TODO: Add logic for data manipulation
 		.then(function (data) {
-			console.log(apiUrl);
-			console.log(data);
 			// set global var to JSON object TODO rename
-			recipeData1 = data;
+			recipeData = data;
+			console.log(recipeData);
+			fillSuggestedRecipes(recipeData);
+			for (let i = 0; i < recipeData.length; i++) {
+				const element = recipeData[i];
+				
+			}
 		})
 		// Error handler
 		.catch(function (err) {
 			console.error(err);
 		});
-	// TODO Uncomment when ready to go live
-	//fillSuggestedRecipes();
 }
-
+//TODO when going live, pass in recipeData
 function fillSuggestedRecipes() {
 	// clear list
 	recipeList.innerHTML = "";
@@ -176,14 +181,13 @@ function columnLayout(title, recipePicUrl, i) {
 	div3.append(img);
 }
 
-function getRecipeInfo() {
-	//TODO refactor for loop through JSON array and set ID = to recipe1, recipe 2 etc.
-	let recipe1 = 560113;
-	let apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=" + recipe1 + "&includeNutrition=true";
-	//	+ "%2C" + recipe2 + 
-	// "%2C" + recipe3 + 
-	// "%2C" + recipe4 +  
+// pass in ID of clicked recipe
+function getRecipeInfo(recipeId) {
 
+	//TODO pass in recipe ID
+	let apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=" + recipeId;
+	console.log(apiUrl);
+	
 	fetch(apiUrl, {
 		"method": "GET",
 		"headers": {
@@ -198,49 +202,20 @@ function getRecipeInfo() {
 				return response.json();
 			}
 		})
-		// TODO: Add logic for data manipulation
 		.then(function (data) {
-			console.log(apiUrl);
 			console.log(data);
-			// set global var to JSON object rename later
-			nutritionData1 = data;
-			console.log(nutritionData1);
+			// set global var to store detailed data
+			let recipeInfo = data;
+			console.log(recipeInfo);
+			return(recipeInfo);
 		})
 		// Error handler
 		.catch(function (err) {
 			console.error(err);
 		});
-	//	+ "%2C" + recipe2 + 
-	// "%2C" + recipe3 + 
-	// "%2C" + recipe4 +  
+	}
 
-	fetch(apiUrl, {
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-key": "9aa92d7aa7msh77d7072478c9634p1b415cjsn6487488da0d0",
-			"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-		}
-	})
-		.then(function (response) {
-			// Will return Json object if the request is successful
-			if (response.status == 200) {
-				console.log(response);
-				return response.json();
-			}
-		})
-		// TODO: Add logic for data manipulation
-		.then(function (data) {
-			console.log(apiUrl);
-			console.log(data);
-			// set global var to JSON object
-			nutritionData1 = data;
-			console.log(nutritionData1);
-		})
-		// Error handler
-		.catch(function (err) {
-			console.error(err);
-		});
-}
+
 
 //Display recipe
 // function displayRecipe(event) {
