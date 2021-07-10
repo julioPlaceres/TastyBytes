@@ -46,7 +46,7 @@ footer {
 
 /* round img corners */
 .roundedCorners {
-    border-radius: 14px;
+    border-radius: 30px !important;
 }
 /* round list of ingredients  */
 .message-header {

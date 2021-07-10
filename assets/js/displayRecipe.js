@@ -1,58 +1,66 @@
+// Global variables
+var outputDivEl = document.querySelector(".output");
+var recipeListEl = document.querySelector(".recipes-list");
+var recipeSelectedEl = document.querySelector(".recipe-selected");
+var ingredientsTableEl;
+var ingredientsTbodyEl;
+var nutritionTableEl;
+var nutritionTbodyEl;
+var recipeSelected;
+var idSelected;
+
+console.log(recipeInfo);
+
+// Displays information of the selected recipe on the screen
 function displayRecipe(event) {
 	// if the target clicked is not an image will return
 	if (event.target.tagName.toLowerCase() != "img") {
 		return;
 	}
 
-	// Removes the current List of recipes
-	document.querySelector(".recipes-list").remove();
+	createBackBtn();
+
+	// Removes the current List of recipes and shows the recipe Selected
+	recipeListEl.classList.add("is-hidden");
+	recipeSelectedEl.classList.remove("is-hidden");
 
 	// Get the image that got cliked
 	let imageSelected = event.target;
 	// Retrieve Data Attribute assign to image
-	let id = imageSelected.dataset.id;
-
-	// Use to pass value from for loop and will
-	// contain the recipe selected
-	let recipeSelected;
+	idSelected = imageSelected.dataset.id;
 
 	// Loops through the recipe object array in order to get the ID and
 	// retrive the object for the main recipe
 	for (let i = 0; i < recipeData.length; i++) {
-		if (id == recipeData[i].id) {
+		if (idSelected == recipeData[i].id) {
 			recipeSelected = recipeData[i];
 		}
 	}
 
 	// Create the elements needed for the display of the recipe
 	let recipeName = document.createElement("h2");
-	let divImg1 = document.createElement("div");
+	let imageHolder = document.createElement("div");
 	let recipeImage = document.createElement("img");
 	let recipeSummary = document.createElement("p");
 
 	// Assign values to the elements and format them
 	recipeName.textContent = recipeSelected.title;
-	recipeName.setAttribute("class", "has-text-centered")
-	divImg1.setAttribute("class", "column");
+	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
+	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners");
 	recipeImage.setAttribute("src", recipeSelected.image);
-	recipeImage.setAttribute("class", "column");
+	recipeImage.setAttribute("class", "column roundedCorners");
+	recipeSummary.setAttribute("class", "mb-5");
 	recipeSummary.innerHTML = recipeInfo[0].summary;
-	
-	// Select the div that will hold the recipe selected and append to page
-	let recipeSelectedDiv = document.querySelector(".recipe-selected");
-	divImg1.append(recipeImage);
-	recipeSelectedDiv.append(recipeName);
-	recipeSelectedDiv.append(divImg1);
-	recipeSelectedDiv.append(recipeSummary);
 
-	// Removes the is-hidden class only from the selected recipe div
-	// and the ingredients list
-	recipeSelectedDiv.classList.remove("is-hidden");
-	ingredientsTable.classList.remove("is-hidden");
+	// Select the div that will hold the recipe selected and append to page
+	imageHolder.append(recipeName);
+	imageHolder.append(recipeImage);
+	recipeSelectedEl.append(imageHolder);
+	recipeSelectedEl.append(recipeSummary);
 
 	// Will display missed ingredients to the page (needs to be bold)
 	for (let i = 0; i < recipeSelected.missedIngredients.length; i++) {
-		// Creates a row
+		// 	Creates a table
 		let trEl = document.createElement("tr");
 		let tdQty = document.createElement("td");
 		let tdName = document.createElement("td");
@@ -76,14 +84,17 @@ function displayRecipe(event) {
 		// Get values from array
 		let units = recipeInfo[0].nutrition.ingredients[ingredientIndex].unit;
 
-		// Give it context and Style
+		// 	Give it context and Style
 		tdQty.innerHTML = "<b>" + amount + " " + units + "</b>";
 		tdName.innerHTML = "<b>" + productName + "</b>";
+
+		// creates table and back button
+		createIngredientsTable();
 
 		// Appends to Page
 		trEl.appendChild(tdQty);
 		trEl.appendChild(tdName);
-		ingredientsTableBody.appendChild(trEl);
+		ingredientsTbodyEl.appendChild(trEl);
 	}
 
 	// Will display the current used ingredients
@@ -117,13 +128,189 @@ function displayRecipe(event) {
 		// Appends to Page
 		trEl.appendChild(tdQty);
 		trEl.appendChild(tdName);
-		ingredientsTableBody.appendChild(trEl);
+		ingredientsTbodyEl.appendChild(trEl);
 	}
 
-	// Add for loop
-	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
-		// TODO : instructions (work in progress)
+	displayPrepInstructions();
+	createNutritionTable();
+
+	// Nutrition info
+	displayNutritionInfo("Calories");
+	displayNutritionInfo("Sugar");
+	displayNutritionInfo("Fat");
+	displayNutritionInfo("Protein");
+	
+	// Additional nutrition
+	
+}
+
+function createIngredientsTable() {
+	// Creates Table elements
+	ingredientsTableEl = document.createElement("table");
+	let ingredientsTrThEl = document.createElement("tr");
+	let ingredientsThQtyEl = document.createElement("th");
+	let ingredientsThIngEl = document.createElement("th");
+	ingredientsTbodyEl = document.createElement("tbody");
+
+	//Asigns values and formatting
+	ingredientsTableEl.setAttribute("class", "ingredients table is-bordered is-striped -isnarrow is-hoverable container mb-3");
+	ingredientsTbodyEl.setAttribute("class", "table-body");
+	ingredientsThQtyEl.textContent = "Quantity";
+	ingredientsThIngEl.textContent = "Ingredients";
+
+	// Append to page
+	ingredientsTrThEl.append(ingredientsThQtyEl);
+	ingredientsTrThEl.append(ingredientsThIngEl);
+	ingredientsTableEl.append(ingredientsTrThEl);
+	ingredientsTableEl.append(ingredientsTbodyEl);
+	recipeSelectedEl.append(ingredientsTableEl);
+}
+
+function displayPrepInstructions(){
+	//Create elements for the header of Steps section
+	let stepsEl = document.createElement("div");
+	let stepsHeaderEl = document.createElement("div");
+	let stepsBodyEl = document.createElement("div");
+	let stepHeader = document.createElement("h3");
+	let prepInfo = document.createElement("p");
+	let prepMins;
+	let readyIn;
+	let servins;
+	let cookingMins;
+
+	// Give it properties and style
+	stepHeader.textContent = "Instruction Steps";
+	prepMins = recipeInfo[0].preparationMinutes;
+	readyIn = recipeInfo[0].readyInMinutes;
+	servins = recipeInfo[0].servings;
+	cookingMins = recipeInfo[0].cookingMinutes;
+	prepInfo.innerHTML = "Prep Mins: <b>" + prepMins + "</b> " +
+	"Ready in Mins: <b>" + readyIn + "</b> " +
+	"Servings: <b>" + servins + "</b> " +
+	"Cooking Mins: <b>" + cookingMins + "</b>";
+	stepsEl.setAttribute("class", "instruction-section");
+	stepsHeaderEl.setAttribute("class", "instruction-header has-text-centered mb-3");
+	stepsBodyEl.setAttribute("class", "instruction-body has-text-left")
+	stepHeader.setAttribute("class", "is-size-5 is-underlined has-text-weight-semibold");
+	
+	// Append to page
+	stepsHeaderEl.append(stepHeader);
+	stepsHeaderEl.append(prepInfo);
+	stepsEl.append(stepsHeaderEl);
+	recipeSelectedEl.append(stepsEl);
+
+	for (let i = 0; i < recipeInfo[0].analyzedInstructions[0].steps.length; i++) {
+		// Get instruction, step No and description
+		let instructionSteps = recipeInfo[0].analyzedInstructions[0].steps;
+		let stepNo = instructionSteps[i].number;
+		let description = instructionSteps[i].step;
+
+		// Create the elements for the list
+		let instructionsUlEl = document.createElement("ul");
+		let instructionsIlEl = document.createElement("il");
+
+		// Assign values to the elements and format them
+		instructionsIlEl.textContent = stepNo + " - " + description;
+
+		// Append them to the page
+		instructionsUlEl.append(instructionsIlEl);
+		stepsBodyEl.append(instructionsUlEl);
+		stepsEl.append(stepsBodyEl);
 	}
 }
 
-recipeList.addEventListener("click", displayRecipe);
+function createNutritionTable() {
+	// Creates Table elements
+	nutritionTableEl = document.createElement("table");
+	let nutritionTrThEl = document.createElement("tr");
+	let nutritionThNameEl = document.createElement("th");
+	let nutritionThAmmountEl = document.createElement("th");
+	let nutritionThUnitEl = document.createElement("th");
+	nutritionTbodyEl = document.createElement("tbody");
+
+	//Asigns values and formatting
+	nutritionTableEl.setAttribute("class", "nutrients table is-bordered is-striped -isnarrow is-hoverable container mt-3");
+	nutritionTbodyEl.setAttribute("class", "table-body");
+	nutritionThNameEl.textContent = "Name";
+	nutritionThAmmountEl.textContent = "ammount";
+	nutritionThUnitEl.textContent = "unit";
+
+	// Append to page
+	nutritionTrThEl.append(nutritionThNameEl);
+	nutritionTrThEl.append(nutritionThAmmountEl);
+	nutritionTrThEl.append(nutritionThUnitEl);
+	nutritionTableEl.append(nutritionTrThEl);
+	nutritionTableEl.append(nutritionTbodyEl);
+	recipeSelectedEl.append(nutritionTableEl);
+}
+
+// Will create a table row with all needed information and appended on table nutrients
+function displayNutritionInfo(nutrientName){
+	// Create Row Elements
+	let elementRow = document.createElement("tr");
+	let elementName = document.createElement("td");
+	let elementAmmount = document.createElement("td");
+	let elementUnit = document.createElement("td");
+	
+	// Get nutrients array
+	let nutrients = recipeInfo[0].nutrition.nutrients;
+
+	// Loop through and find name index
+	let nutrientIndex;
+	for(let i = 0; i < nutrients.length; i++){
+		if(nutrientName == nutrients[i].name){
+			nutrientIndex = i;
+		}
+	}
+
+	// Create Table Row
+	elementName.textContent = nutrients[nutrientIndex].name;
+	elementAmmount.textContent = nutrients[nutrientIndex].amount;
+	elementUnit.textContent = nutrients[nutrientIndex].unit;
+
+	// Append to table
+	elementRow.append(elementName);
+	elementRow.append(elementAmmount);
+	elementRow.append(elementUnit);
+	nutritionTbodyEl.append(elementRow);
+}
+
+function createBackBtn() {
+	//create btn elements
+	let btnSpan = document.createElement("span");
+	let innerSpan = document.createElement("span");
+	let backBtn = document.createElement("button");
+	let icon = document.createElement("i");
+	// set class for bulma and font awesome icon
+	btnSpan.setAttribute("class", "icon is-medium");
+	backBtn.setAttribute("class", "button is-success backBtn");
+	backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -2rem; max-width: 6rem;");
+	icon.setAttribute("class", "fas fa-chevron-left");
+	innerSpan.textContent = "Back"
+	// append back button to the right tile
+	backBtn.append(btnSpan);
+	backBtn.append(innerSpan);
+	btnSpan.append(icon);
+	recipeSelectedEl.append(backBtn);
+}
+
+// Logic that hides selected recipe and goes back to the list
+function goBack(event) {
+	// let recipeSelectedDiv = document.querySelector(".recipe-selected");
+	// let recipeList = document.querySelector(".recipes-list");
+	// let recipeSelectedOutput = document.querySelector(".table")
+	let clickTag = event.target.tagName.toLowerCase();
+	// if user clicked the button
+	if (clickTag == "button" || clickTag == "span" || clickTag == "i") {
+		//hide the single recipe
+		recipeSelectedEl.classList.add("is-hidden");
+		//unhide the previous list
+		recipeListEl.classList.remove("is-hidden");
+		// Will clear the current recipe and delete the back button
+		recipeSelectedEl.innerHTML = "";
+	}
+}
+
+// Event listener for back button
+recipeSelectedEl.addEventListener("click", goBack)
+recipeListEl.addEventListener("click", displayRecipe);
