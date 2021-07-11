@@ -13,6 +13,8 @@ var glutenFreeEl;
 var recipeSelected;
 var idSelected;
 
+console.log(recipeInfo);
+
 // Displays information of the selected recipe on the screen
 function displayRecipe(event) {
 	// if the target clicked is not an image will return
@@ -30,42 +32,39 @@ function displayRecipe(event) {
 	let imageSelected = event.target;
 	// Retrieve Data Attribute assign to image
 	idSelected = imageSelected.dataset.id;
-	displayRecipeCallback(idSelected);
+	getRecipeInfo(idSelected);
 }
 
-function displayRecipeCallback(idSelected){
+function displayRecipeCallback(){
 	// Loops through the recipe object array in order to get the ID and
 	// retrive the object for the main recipe
-	for (let i = 0; i < cocktailList; i++) {
-		if (idSelected == cocktailList[i].id) {
-			recipeSelected = cocktailList[i];
+	for (let i = 0; i < recipeData.length; i++) {
+		if (idSelected == recipeData[i].id) {
+			recipeSelected = recipeData[i];
 		}
-	
+	}
 
 	// Create the elements needed for the display of the recipe
 	let recipeName = document.createElement("h2");
 	let imageHolder = document.createElement("div");
 	let recipeImage = document.createElement("img");
 	let recipeSummary = document.createElement("p");
-	let recipeInfo = cocktailList;
-	console.log(recipeInfo);
+
 	// Assign values to the elements and format them
-	recipeName.textContent = cocktailList[i].strDrink;
-	console.log(cocktailList[i],strDrink);
+	recipeName.textContent = recipeSelected.title;
 	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
 	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners");
-	recipeImage.setAttribute("src", cocktailList[i].strDrinkThumb);
-	console.log(cocktailList[i].strDrinkThumb);
+	recipeImage.setAttribute("src", recipeSelected.image);
 	recipeImage.setAttribute("class", "column roundedCorners container");
 	recipeSummary.setAttribute("class", "mb-5");
-	// recipeSummary.innerHTML = recipeInfo[0].summary;
+	recipeSummary.innerHTML = recipeInfo[0].summary;
 
 	// Select the div that will hold the recipe selected and append to page
 	imageHolder.append(recipeName);
 	imageHolder.append(recipeImage);
 	recipeSelectedEl.append(imageHolder);
 	recipeSelectedEl.append(recipeSummary);
-	}
+
 	// Will display missed ingredients to the page (needs to be bold)
 	for (let i = 0; i < recipeSelected.missedIngredients.length; i++) {
 		// 	Creates a table
@@ -198,7 +197,7 @@ function displayPrepInstructions(){
 	let cookingMins;
 
 	// Give it properties and style
-	stepHeader.textContent = "Mixing Instructions";
+	stepHeader.textContent = "Instruction Steps";
 	prepMins = recipeInfo[0].preparationMinutes;
 	readyIn = recipeInfo[0].readyInMinutes;
 	servings = recipeInfo[0].servings;

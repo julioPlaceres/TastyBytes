@@ -89,43 +89,6 @@ function getCocktailByIngredient (){
       });
 }
 
-// pass in ID of clicked recipe
-function getRecipeInfo(recipeId) {
-
-	//TODO pass in recipe ID
-	let apiUrl = "https://the-cocktail-db.p.rapidapi.com/lookup.php?i=" + recipeId;
-	console.log(apiUrl);
-	
-	fetch(apiUrl, {
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-key": "e4f90a1b56msh4d99ca7b80ba747p18736ejsn46447159ba5e",
-			"x-rapidapi-host": "the-cocktail-db.p.rapidapi.com"
-		}
-	})
-		.then(function (response) {
-			// Will return Json object if the request is successful
-			if (response.status == 200) {
-				console.log(response);
-				return response.json();
-			}
-		})
-		.then(function (data) {
-			console.log(data);
-			// set global var to store detailed data
-			//TODO have selected recipe call the api response only
-			//then, here in the .then, call the rest of the function passing in the data from the API
-			recipeInfo = data;
-			displayRecipeCallback();
-			console.log(recipeInfo);
-			
-		})
-		// Error handler
-		.catch(function (err) {
-			console.error(err);
-		});
-	}
-
 function handleSearchInput() {
 	// get ingredient input value
 	let searchInputVal = searchInputEl.value.trim();
