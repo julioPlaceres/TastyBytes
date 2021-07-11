@@ -6,16 +6,9 @@ var output = document.querySelector(".output");
 var searchInputEl = document.querySelector("#search-input");
 var ingredientList = document.querySelector("#ingredient-list");
 var ingredients = [];
-// recipeData1 stores the returned JSON from the API
-//TODO change to real variables when going live
+// recipeData stores the returned JSON from the API
 var recipeData, recipeInfo;
-//getRecipeInfo(560113);
 
-// Test Link
-console.log("Initial API call");
-console.log(recipeData);
-console.log("Detailed recipe info");
-// console.log(recipeInfo);
 function handleSearchInput() {
 	// get ingredient input value
 	let searchInputVal = searchInputEl.value.trim();
