@@ -1,5 +1,6 @@
-body {
+body, html {
     background-image: linear-gradient(rgb(6, 242, 171), rgb(14, 240, 240));
+    width: 100%;
     touch-action: manipulation;
 }
 
