@@ -75,6 +75,10 @@ nav {
     .backBtn {
         margin-left: .1rem !important;
     }
+
+    .tile {
+        justify-content: center !important;
+    }
 }
 
 .column img:hover {
