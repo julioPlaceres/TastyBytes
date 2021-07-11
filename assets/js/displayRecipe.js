@@ -32,7 +32,10 @@ function displayRecipe(event) {
 	let imageSelected = event.target;
 	// Retrieve Data Attribute assign to image
 	idSelected = imageSelected.dataset.id;
+	getRecipeInfo(idSelected);
+}
 
+function displayRecipeCallback(){
 	// Loops through the recipe object array in order to get the ID and
 	// retrive the object for the main recipe
 	for (let i = 0; i < recipeData.length; i++) {
@@ -77,76 +80,86 @@ function displayRecipe(event) {
 		// to get the missing ingredient index
 		let ingredientIndex;
 		//Find the index of the ingredient missing
-		for (let a = 0; a < recipeInfo[0].nutrition.ingredients.length; a++) {
-			searchIndex = recipeInfo[0].nutrition.ingredients[a].name.indexOf(productName);
+		
+		for (let a = 0; a < recipeInfo[0].extendedIngredients.length; a++) {
+			searchIndex = recipeInfo[0].extendedIngredients[a].name.indexOf(productName);
 			if (searchIndex != -1) {
 				ingredientIndex = a;
 				break;
 			}
 		}
-
+		
 		// Get values from array
-		let units = recipeInfo[0].nutrition.ingredients[ingredientIndex].unit;
-
+		let units = recipeInfo[0].extendedIngredients[ingredientIndex].unit;
+		
 		// 	Give it context and Style
 		tdQty.innerHTML = "<b>" + amount + " " + units + "</b>";
 		tdName.innerHTML = "<b>" + productName + "</b>";
-
+		
+		function fillIngredients (){
+		// Appends to Page
+			trEl.appendChild(tdQty);
+			trEl.appendChild(tdName);
+			ingredientsTbodyEl.appendChild(trEl);
+			
+			// Will display the current used ingredients
+			for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
+				// Creates a row
+				let trEl = document.createElement("tr");
+				let tdQty = document.createElement("td");
+				let tdName = document.createElement("td");
+				
+				// Get values and format it
+				let amount = recipeSelected.usedIngredients[i].amount;
+				let productName = recipeSelected.usedIngredients[i].name;
+				
+				// Will be use to loop through the ingredients of the second API call
+				// to get the rest of the ingredients index
+				for (let a = 0; a < recipeInfo[0].extendedIngredients.length; a++) {
+					searchIndex = recipeInfo[0].extendedIngredients[a].name.indexOf(productName);
+					if (searchIndex != -1) {
+						ingredientIndex = a
+						break;
+					}
+				}
+				
+				// Get values from array
+				let units = recipeInfo[0].extendedIngredients[ingredientIndex].unit;
+				
+				// Give it context
+				tdQty.textContent = amount + " " + units;
+				tdName.textContent = productName;
+				
+				// Appends to Page
+				trEl.appendChild(tdQty);
+				trEl.appendChild(tdName);
+				ingredientsTbodyEl.appendChild(trEl);
+			}
+			
+		}
+		if (recipeInfo[0].nutrients != undefined)	{
+			createNutritionTable();
+			
+			// Nutrition info
+			displayNutritionInfo("Calories");
+			displayNutritionInfo("Sugar");
+			displayNutritionInfo("Fat");
+			displayNutritionInfo("Protein");
+			
+		}
+	}
+	// Additional nutrition
+	if (recipeInfo[0].extendedIngredients != undefined){
+		
 		// creates table and back button
 		createIngredientsTable();
-
-		// Appends to Page
-		trEl.appendChild(tdQty);
-		trEl.appendChild(tdName);
-		ingredientsTbodyEl.appendChild(trEl);
+		fillIngredients();
 	}
-
-	// Will display the current used ingredients
-	for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
-		// Creates a row
-		let trEl = document.createElement("tr");
-		let tdQty = document.createElement("td");
-		let tdName = document.createElement("td");
-
-		// Get values and format it
-		let amount = recipeSelected.usedIngredients[i].amount;
-		let productName = recipeSelected.usedIngredients[i].name;
-
-		// Will be use to loop through the ingredients of the second API call
-		// to get the rest of the ingredients index
-		for (let a = 0; a < recipeInfo[0].nutrition.ingredients.length; a++) {
-			searchIndex = recipeInfo[0].nutrition.ingredients[a].name.indexOf(productName);
-			if (searchIndex != -1) {
-				ingredientIndex = a
-				break;
-			}
-		}
-
-		// Get values from array
-		let units = recipeInfo[0].nutrition.ingredients[ingredientIndex].unit;
-
-		// Give it context
-		tdQty.textContent = amount + " " + units;
-		tdName.textContent = productName;
-
-		// Appends to Page
-		trEl.appendChild(tdQty);
-		trEl.appendChild(tdName);
-		ingredientsTbodyEl.appendChild(trEl);
+	if (recipeInfo[0].analyzedInstructions != ""){
+		displayPrepInstructions();
 	}
-
-	displayPrepInstructions();
-	createNutritionTable();
-
-	// Nutrition info
-	displayNutritionInfo("Calories");
-	displayNutritionInfo("Sugar");
-	displayNutritionInfo("Fat");
-	displayNutritionInfo("Protein");
-	
-	// Additional nutrition
-	createNutritionFooter();
-	setNutritionFooter();
+			createNutritionFooter();
+			setNutritionFooter();
 }
 
 function createIngredientsTable() {
@@ -180,18 +193,18 @@ function displayPrepInstructions(){
 	let prepInfo = document.createElement("p");
 	let prepMins;
 	let readyIn;
-	let servins;
+	let servings;
 	let cookingMins;
 
 	// Give it properties and style
 	stepHeader.textContent = "Instruction Steps";
 	prepMins = recipeInfo[0].preparationMinutes;
 	readyIn = recipeInfo[0].readyInMinutes;
-	servins = recipeInfo[0].servings;
+	servings = recipeInfo[0].servings;
 	cookingMins = recipeInfo[0].cookingMinutes;
 	prepInfo.innerHTML = "Prep Mins: <b>" + prepMins + "</b> " +
 	"Ready in Mins: <b>" + readyIn + "</b> " +
-	"Servings: <b>" + servins + "</b> " +
+	"Servings: <b>" + servings + "</b> " +
 	"Cooking Mins: <b>" + cookingMins + "</b>";
 	stepsEl.setAttribute("class", "instruction-section");
 	stepsHeaderEl.setAttribute("class", "instruction-header has-text-centered mb-3");
@@ -229,7 +242,7 @@ function createNutritionTable() {
 	nutritionTableEl = document.createElement("table");
 	let nutritionTrThEl = document.createElement("tr");
 	let nutritionThNameEl = document.createElement("th");
-	let nutritionThAmmountEl = document.createElement("th");
+	let nutritionThAmountEl = document.createElement("th");
 	let nutritionThUnitEl = document.createElement("th");
 	nutritionTbodyEl = document.createElement("tbody");
 
@@ -237,12 +250,12 @@ function createNutritionTable() {
 	nutritionTableEl.setAttribute("class", "nutrients table is-bordered is-striped -isnarrow is-hoverable container mt-3");
 	nutritionTbodyEl.setAttribute("class", "table-body");
 	nutritionThNameEl.textContent = "Name";
-	nutritionThAmmountEl.textContent = "amount";
+	nutritionThAmountEl.textContent = "amount";
 	nutritionThUnitEl.textContent = "unit";
 
 	// Append to page
 	nutritionTrThEl.append(nutritionThNameEl);
-	nutritionTrThEl.append(nutritionThAmmountEl);
+	nutritionTrThEl.append(nutritionThAmountEl);
 	nutritionTrThEl.append(nutritionThUnitEl);
 	nutritionTableEl.append(nutritionTrThEl);
 	nutritionTableEl.append(nutritionTbodyEl);
@@ -254,7 +267,7 @@ function displayNutritionInfo(nutrientName){
 	// Create Row Elements
 	let elementRow = document.createElement("tr");
 	let elementName = document.createElement("td");
-	let elementAmmount = document.createElement("td");
+	let elementAmount = document.createElement("td");
 	let elementUnit = document.createElement("td");
 	
 	// Get nutrients array
@@ -270,12 +283,12 @@ function displayNutritionInfo(nutrientName){
 
 	// Create Table Row
 	elementName.textContent = nutrients[nutrientIndex].name;
-	elementAmmount.textContent = nutrients[nutrientIndex].amount;
+	elementAmount.textContent = nutrients[nutrientIndex].amount;
 	elementUnit.textContent = nutrients[nutrientIndex].unit;
 
 	// Append to table
 	elementRow.append(elementName);
-	elementRow.append(elementAmmount);
+	elementRow.append(elementAmount);
 	elementRow.append(elementUnit);
 	nutritionTbodyEl.append(elementRow);
 }
@@ -288,7 +301,7 @@ function createNutritionFooter(){
 	glutenFreeEl = document.createElement("div");
 
 	// Assign Format
-	nutritionEl.setAttribute("class", "columns container");
+	nutritionEl.setAttribute("class", "columns container has-text-centered mt-4");
 	veganEl.setAttribute("class", "vegan column");
 	veganEl.textContent = "Vegan";
 	vegetarianEl.setAttribute("class", " vegetarian column");
@@ -308,10 +321,6 @@ function setNutritionFooter(){
 	let veganStatus = recipeInfo[0].vegan;
 	let vegetarianStatus = recipeInfo[0].vegetarian;
 	let gluttenFreeStatus = recipeInfo[0].glutenFree;
-
-	console.log(veganStatus);
-	console.log(vegetarianStatus);
-	console.log(gluttenFreeStatus);
 
 	// get yellow icon if it isnt/green if it is/red if no info
 	var veganIconStatus = getIcon(veganStatus);
@@ -374,7 +383,7 @@ function createBackBtn() {
 	// set class for bulma and font awesome icon
 	btnSpan.setAttribute("class", "back icon is-medium");
 	backBtn.setAttribute("class", "back button is-success backBtn");
-	backBtn.setAttribute("style", "back position: relative; margin-left: -2rem; margin-top: -2rem; max-width: 6rem;");
+	backBtn.setAttribute("style", "back position: relative; margin-left: -.1rem; margin-top: -2rem; max-width: 6rem;");
 	icon.setAttribute("class", "back fas fa-chevron-left");
 	innerSpan.setAttribute("class", "back");
 	innerSpan.textContent = "Back"

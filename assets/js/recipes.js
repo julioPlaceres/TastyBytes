@@ -1,8 +1,4 @@
 // Test ingredients for API call -- Change when HTMl is completed
-var ingredient1 = "Bread";
-var ingredient2 = "basil";
-var ingredient3 = "Olive Oil";
-var ingredient4 = "garlic";
 var recipeBtn = document.querySelector(".recipeBtn");
 var addIngredientBtn = document.querySelector(".add");
 var recipeList = document.querySelector(".recipes-list");
@@ -10,11 +6,9 @@ var output = document.querySelector(".output");
 var searchInputEl = document.querySelector("#search-input");
 var ingredientList = document.querySelector("#ingredient-list");
 var ingredients = [];
-var ingredientsTable = document.querySelector(".table");
-var ingredientsTableBody = document.querySelector(".table-body");
 // recipeData1 stores the returned JSON from the API
 //TODO change to real variables when going live
-var recipeData, apiData;
+var recipeData, recipeInfo;
 //getRecipeInfo(560113);
 
 // Test Link
@@ -128,12 +122,12 @@ function searchRecipeByIngredients() {
 				return response.json();
 			}
 		})
-		// TODO: Add logic for data manipulation
 		.then(function (data) {
-			// set global var to JSON object TODO rename
+			// set global var to JSON object
 					recipeData = data;
 			console.log(recipeData);
 			if (recipeData != ""){
+				// if the api returned info, show it on page
 				fillSuggestedRecipes(recipeData);
 			}
 			else{
@@ -146,7 +140,7 @@ function searchRecipeByIngredients() {
 			console.error(err);
 		});
 }
-//TODO when going live, pass in recipeData
+// shows the top 5 recipes based on ingredients
 function fillSuggestedRecipes() {
 	unhideRecipeList();
 	// clear list
@@ -157,7 +151,6 @@ function fillSuggestedRecipes() {
 	div1.textContent = "Suggested Recipes";
 	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold box has-background-success has-text-white");
 	recipeList.append(div1);
-	// TODO change to correct var when we finalize project
 	for (let i = 0; i < recipeData.length; i++) {
 		var title = recipeData[i].title;
 		var recipePicUrl = recipeData[i].image;
@@ -266,9 +259,10 @@ function getRecipeInfo(recipeId) {
 			// set global var to store detailed data
 			//TODO have selected recipe call the api response only
 			//then, here in the .then, call the rest of the function passing in the data from the API
-			apiData = data;
-			console.log(apiData);
-			return(apiData);
+			recipeInfo = data;
+			displayRecipeCallback();
+			console.log(recipeInfo);
+			
 		})
 		// Error handler
 		.catch(function (err) {
