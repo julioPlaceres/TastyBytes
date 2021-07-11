@@ -14,7 +14,7 @@ function createBackBtn (){
   backBtn.append(btnSpan);
   backBtn.append(innerSpan);
   btnSpan.append(icon);
-  output.append(backBtn);
+  recipeList.append(backBtn);
 }
 
 function goBack (event){

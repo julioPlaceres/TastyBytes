@@ -10,13 +10,8 @@ var cocktailIngredients = [];
 var ingredientsTable = document.querySelector(".table");
 var ingredientsTableBody = document.querySelector(".table-body");
 var backBtn = document.querySelector(".backBtn");
-var popularCocktails = popularCocktailsObj.drinks;
-var byIngCocktails = byIngCocktailsObj.drinks;
-var cocktailList;
-console.log("Popular Cocktails");
-console.log(popularCocktails);
-console.log("By ingredient");
-console.log(byIngCocktails);
+var cocktailList, recipeInfo;
+
 // api call to get popular cocktails
 function getPopularCocktails() {
     var popularCockTailsUrl = "https://the-cocktail-db.p.rapidapi.com/popular.php" //+ ingredients1 //+"%2C"
@@ -51,7 +46,19 @@ function getPopularCocktails() {
 }
 // api call to get cocktails from ingredients input
 function getCocktailByIngredient (){
-  let getCockTailsUrl = "https://the-cocktail-db.p.rapidapi.com/filter.php?i=Gin"
+  let getCockTailsUrl = "https://the-cocktail-db.p.rapidapi.com/filter.php?i="
+	for (let i = 0; i < cocktailIngredients.length; i++) {
+		if (cocktailIngredients.length == 1){
+			getCockTailsUrl += cocktailIngredients[i];
+		}
+		else if (cocktailIngredients.length > 1){
+			getCockTailsUrl += cocktailIngredients[i] + "%2C";
+		}
+	}
+	if (cocktailIngredients.length < 1) {
+		getCockTailsUrl = "https://the-cocktail-db.p.rapidapi.com/popular.php";
+	}
+	console.log(getCockTailsUrl);
   fetch(getCockTailsUrl, {
     "method": "GET",
     "headers": {
@@ -64,12 +71,16 @@ function getCocktailByIngredient (){
         if (res.ok == true) {
           return res.json();    
         }
+				else {
+					alert("404 error")
+				}
       })
   
       .then(function (data) {
         
         console.log(data);
-        cocktailList = data;
+        cocktailList = data.drinks;
+				fillSuggestedRecipes(cocktailList);
         
       })
       //Error handler
@@ -158,20 +169,23 @@ function storeIngredients() {
 
 
 function fillSuggestedRecipes() {
+	unhideRecipeList();
 	// clear list
 	recipeList.innerHTML = "";
+	createBackBtnSuggested();
 	// create title
 	let div1 = document.createElement("div");
 	div1.textContent = "Suggested Cocktails";
 	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold box has-background-success has-text-white");
 	recipeList.append(div1);
 	// TODO change to correct var when we finalize project
-	for (let i = 0; i < 5; i++) {
-		var title = popularCocktails[i].strDrink;
-		var recipePicUrl = popularCocktails[i].strDrinkThumb;
+	for (let i = 0; i < cocktailList.length && i < 5; i++) {
+		var title = cocktailList[i].strDrink;
+		var recipePicUrl = cocktailList[i].strDrinkThumb;
 
 		columnLayout(title, recipePicUrl, i);
 	}
+	hideTile1();
 }
 
 
@@ -183,7 +197,7 @@ function columnLayout(title, recipePicUrl, i) {
 	var div3 = document.createElement("div");
 	// Set Id attribute in order to be easier to determine which image the user clicked on
 	img.setAttribute("src", recipePicUrl);
-	img.setAttribute("data-id", popularCocktails[i].idDrink);
+	img.setAttribute("data-id", cocktailList[i].idDrink);
 	img.setAttribute("class", "roundedCorners mt-5");
 	// seat attribute on divs in this order for bulma css columns layout
 	div1.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold box has-background-success has-text-white");
@@ -197,6 +211,57 @@ function columnLayout(title, recipePicUrl, i) {
 	div3.append(img);
 }
 
+function unhideRecipeList (){
+	let tile2 = document.querySelector(".right-tile");
+	// if tile 2 is hidden, unhide it
+	if (tile2.classList.contains("is-hidden")){
+		tile2.classList.remove("is-hidden")
+	}
+}
+
+function hideTile1 (){
+	let tile1 = document.querySelector(".left-tile");
+	if (tile1.classList.contains("is-hidden") == false){
+		tile1.classList.add("is-hidden");
+	}
+
+}
+
+function createBackBtnSuggested (){
+  //create btn elements
+  let btnSpan = document.createElement("span");
+  let innerSpan = document.createElement("span");
+  let backBtn = document.createElement("button");
+  let icon = document.createElement("i");
+  // set class for bulma and font awesome icon
+  btnSpan.setAttribute("class", "icon is-medium back");
+  backBtn.setAttribute("class", "button is-success backBtn back");
+  backBtn.setAttribute("style", "position: relative; margin-left: -.1rem; margin-top: -2rem; margin-bottom: 1rem; max-width: 6rem;");
+  icon.setAttribute("class", "fas fa-chevron-left back");
+  innerSpan.setAttribute("class", "back");
+  innerSpan.textContent = "Back"
+  // append back button to the right tile
+  backBtn.append(btnSpan);
+  backBtn.append(innerSpan);
+  btnSpan.append(icon);
+  recipeList.append(backBtn);
+}
+
+function goBackIng (event){
+	let tile1 = document.querySelector(".left-tile");
+	let tile2 = document.querySelector(".right-tile");
+	let clickTag = event.target;
+  // if user clicked the back button
+  if (clickTag.classList.contains("back")){
+		if (tile1.classList.contains("is-hidden")){
+			// hide tile 2 and show tile 1
+			tile1.classList.remove("is-hidden");
+			tile2.classList.add("is-hidden");
+		}
+  }
+}
+
+
 //capitalize every word
 function capitalFormat(searchInput) {
 	var cap = searchInput.split(" ");
@@ -207,6 +272,7 @@ function capitalFormat(searchInput) {
 }
 // Execute a function when the user presses a key on the keyboard while typing in the searchbox
 searchInputEl.addEventListener("keyup", onEnterKey);
-cocktailBtn.addEventListener("click", fillSuggestedRecipes);
+cocktailBtn.addEventListener("click", getCocktailByIngredient);
 addIngredientBtn.addEventListener("click", handleSearchInput);
 ingredientList.addEventListener("click", removeIngredient);
+recipeList.addEventListener("click", goBackIng)
