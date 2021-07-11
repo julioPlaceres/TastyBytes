@@ -187,10 +187,11 @@ function createBackBtnSuggested (){
   let backBtn = document.createElement("button");
   let icon = document.createElement("i");
   // set class for bulma and font awesome icon
-  btnSpan.setAttribute("class", "icon is-medium");
-  backBtn.setAttribute("class", "button is-success backBtn");
+  btnSpan.setAttribute("class", "icon is-medium back");
+  backBtn.setAttribute("class", "button is-success backBtn back");
   backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -2rem; margin-bottom: 1rem; max-width: 6rem;");
-  icon.setAttribute("class", "fas fa-chevron-left");
+  icon.setAttribute("class", "fas fa-chevron-left back");
+  innerSpan.setAttribute("class", "back");
   innerSpan.textContent = "Back"
   // append back button to the right tile
   backBtn.append(btnSpan);
@@ -202,9 +203,9 @@ function createBackBtnSuggested (){
 function goBackIng (event){
 	let tile1 = document.querySelector(".left-tile");
 	let tile2 = document.querySelector(".right-tile");
-	let clickTag = event.target.tagName.toLowerCase();
-  // if user clicked the button
-  if (clickTag == "button" || clickTag == "span" || clickTag =="i"){
+	let clickTag = event.target;
+  // if user clicked the back button
+  if (clickTag.classList.contains("back")){
 		if (tile1.classList.contains("is-hidden")){
 			// hide tile 2 and show tile 1
 			tile1.classList.remove("is-hidden");
