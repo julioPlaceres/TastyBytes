@@ -330,11 +330,11 @@ function getIcon(status){
 
 	switch(status){
 		case true:
-			iconContent = getIconStatus("has-text-success", "fa-check-square", status);
+			iconContent = getIconStatus("has-text-success", "fa-check-square", "Yes");
 		break;
 
 		case false:
-			iconContent = getIconStatus("has-text-warning", "fa-exclamation-triangle", status);
+			iconContent = getIconStatus("has-text-warning", "fa-exclamation-triangle", "No");
 		break;
 
 		default:
