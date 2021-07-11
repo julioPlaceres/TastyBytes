@@ -67,6 +67,10 @@ nav {
     height: 100px !important;
 } 
 
+.column img:hover {
+    cursor: pointer;
+}
+
 @media  screen and (max-width:1024px) {
     .left-tile {
         margin-right: 25px !important;
@@ -85,10 +89,13 @@ nav {
     .tile {
         justify-content: center !important;
     }
+
+    #search-input, .button {
+        height: 3.5rem !important;
+    }
+
+
 }
 
-.column img:hover {
-    cursor: pointer;
-}
 
 
