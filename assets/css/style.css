@@ -1,5 +1,6 @@
 body {
     background-image: linear-gradient(rgb(6, 242, 171), rgb(14, 240, 240));
+    touch-action: manipulation;
 }
 
 header {
