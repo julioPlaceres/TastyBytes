@@ -232,7 +232,7 @@ function createNutritionTable() {
 	nutritionTableEl.setAttribute("class", "nutrients table is-bordered is-striped -isnarrow is-hoverable container mt-3");
 	nutritionTbodyEl.setAttribute("class", "table-body");
 	nutritionThNameEl.textContent = "Name";
-	nutritionThAmmountEl.textContent = "ammount";
+	nutritionThAmmountEl.textContent = "amount";
 	nutritionThUnitEl.textContent = "unit";
 
 	// Append to page
