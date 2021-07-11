@@ -6,6 +6,10 @@ var ingredientsTableEl;
 var ingredientsTbodyEl;
 var nutritionTableEl;
 var nutritionTbodyEl;
+var nutritionEl;
+var veganEl;
+var vegetarianEl;
+var glutenFreeEl;
 var recipeSelected;
 var idSelected;
 
@@ -48,7 +52,7 @@ function displayRecipe(event) {
 	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
 	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners");
 	recipeImage.setAttribute("src", recipeSelected.image);
-	recipeImage.setAttribute("class", "column roundedCorners");
+	recipeImage.setAttribute("class", "column roundedCorners container");
 	recipeSummary.setAttribute("class", "mb-5");
 	recipeSummary.innerHTML = recipeInfo[0].summary;
 
@@ -141,7 +145,8 @@ function displayRecipe(event) {
 	displayNutritionInfo("Protein");
 	
 	// Additional nutrition
-	
+	createNutritionFooter();
+	setNutritionFooter();
 }
 
 function createIngredientsTable() {
@@ -275,6 +280,91 @@ function displayNutritionInfo(nutrientName){
 	nutritionTbodyEl.append(elementRow);
 }
 
+function createNutritionFooter(){
+	// Create nutrition elements
+	nutritionEl = document.createElement("div");
+	veganEl = document.createElement("div");
+	vegetarianEl = document.createElement("div");
+	glutenFreeEl = document.createElement("div");
+
+	// Assign Format
+	nutritionEl.setAttribute("class", "columns container");
+	veganEl.setAttribute("class", "vegan column");
+	veganEl.textContent = "Vegan";
+	vegetarianEl.setAttribute("class", " vegetarian column");
+	vegetarianEl.textContent = "Vegetarian";
+	glutenFreeEl.setAttribute("class", "gluttenFree column");
+	glutenFreeEl.textContent = "Glutten Free";
+
+	// Append to page
+	nutritionEl.append(veganEl);
+	nutritionEl.append(vegetarianEl);
+	nutritionEl.append(glutenFreeEl);
+	recipeSelectedEl.append(nutritionEl);
+}
+
+function setNutritionFooter(){
+	// Get Wheter recipe is vegan/vegetarian/glutten free
+	let veganStatus = recipeInfo[0].vegan;
+	let vegetarianStatus = recipeInfo[0].vegetarian;
+	let gluttenFreeStatus = recipeInfo[0].glutenFree;
+
+	console.log(veganStatus);
+	console.log(vegetarianStatus);
+	console.log(gluttenFreeStatus);
+
+	// get yellow icon if it isnt/green if it is/red if no info
+	var veganIconStatus = getIcon(veganStatus);
+	var vegetarianIconStatus = getIcon(vegetarianStatus);
+	var gluttenFreeIconStatus = getIcon(gluttenFreeStatus);
+
+	// append it to page
+	document.querySelector(".vegan").append(veganIconStatus);
+	document.querySelector(".vegetarian").append(vegetarianIconStatus);
+	document.querySelector(".gluttenFree").append(gluttenFreeIconStatus);
+}
+
+function getIcon(status){
+	let iconSet = document.createElement("div");
+	let iconContent;
+
+	switch(status){
+		case true:
+			iconContent = getIconStatus("has-text-success", "fa-check-square", "Yes");
+		break;
+
+		case false:
+			iconContent = getIconStatus("has-text-warning", "fa-exclamation-triangle", "No");
+		break;
+
+		default:
+			iconContent = getIconStatus("has-text-warning", "fa-exclamation-triangle", "No information found");
+		break;
+	}
+	iconSet.append(iconContent);
+	return iconSet;
+}
+
+// Will return the icon appropiate to the parameters passed on
+function getIconStatus(textType, iconType, status){
+	// Create Elements
+	let iconText = document.createElement("span");
+	let iconSpan = document.createElement("span");
+	let i = document.createElement("i");
+
+	// Give them classes (This will decide which type of icon will return)
+	iconText.setAttribute("class", "icon-text " + textType);
+	iconText.textContent = status;
+	iconSpan.setAttribute("class", "icon");
+	i.setAttribute("class", "fas " + iconType)
+
+	// Append and return
+	iconSpan.append(i);
+	iconText.append(iconSpan);
+	return iconText;
+}
+
+// Will return a red stop sign to display no info about nutrition status
 function createBackBtn() {
 	//create btn elements
 	let btnSpan = document.createElement("span");
@@ -282,10 +372,11 @@ function createBackBtn() {
 	let backBtn = document.createElement("button");
 	let icon = document.createElement("i");
 	// set class for bulma and font awesome icon
-	btnSpan.setAttribute("class", "icon is-medium");
-	backBtn.setAttribute("class", "button is-success backBtn");
-	backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -2rem; max-width: 6rem;");
-	icon.setAttribute("class", "fas fa-chevron-left");
+	btnSpan.setAttribute("class", "back icon is-medium");
+	backBtn.setAttribute("class", "back button is-success backBtn");
+	backBtn.setAttribute("style", "back position: relative; margin-left: -2rem; margin-top: -2rem; max-width: 6rem;");
+	icon.setAttribute("class", "back fas fa-chevron-left");
+	innerSpan.setAttribute("class", "back");
 	innerSpan.textContent = "Back"
 	// append back button to the right tile
 	backBtn.append(btnSpan);
@@ -296,12 +387,9 @@ function createBackBtn() {
 
 // Logic that hides selected recipe and goes back to the list
 function goBack(event) {
-	// let recipeSelectedDiv = document.querySelector(".recipe-selected");
-	// let recipeList = document.querySelector(".recipes-list");
-	// let recipeSelectedOutput = document.querySelector(".table")
-	let clickTag = event.target.tagName.toLowerCase();
+	let clickTag = event.target;
 	// if user clicked the button
-	if (clickTag == "button" || clickTag == "span" || clickTag == "i") {
+	if (clickTag.classList.contains("back")) {
 		//hide the single recipe
 		recipeSelectedEl.classList.add("is-hidden");
 		//unhide the previous list
