@@ -51,7 +51,7 @@ function displayRecipeCallback(){
 	// Assign values to the elements and format them
 	recipeName.textContent = recipeSelected.title;
 	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
-	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners");
+	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners my-5");
 	recipeImage.setAttribute("src", recipeSelected.image);
 	recipeImage.setAttribute("class", "column roundedCorners container");
 	recipeSummary.setAttribute("class", "mb-5");
