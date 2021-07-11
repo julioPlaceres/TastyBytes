@@ -14,12 +14,10 @@ nav {
     max-height: 100px;
 }
 
-footer {
+.footer {
+    background-color: white;
     margin-top: 8rem;
-}
-
-.is-fullheight-100vh {
-    height: 100vh;
+    padding: 3rem 1.5rem 2rem !important;
 }
 
 .logo {
@@ -34,14 +32,6 @@ footer {
 .navbar-item {
     font-size: 1.7rem;
     padding-right: 10.0rem !important;
-}
-
-.left-tile {
-    margin-left: 15px;
-}
-
-.right-tile {
-    margin-right: 15px;
 }
 
 /* round img corners */
@@ -71,17 +61,19 @@ footer {
     height: 100px !important;
 } 
 
-@media  screen and (max-width:768px) {
+@media  screen and (max-width:1024px) {
     .left-tile {
-        margin-right: 15px;
+        margin-right: 25px !important;
+        margin-left: 25px !important;
     }
     
     .right-tile {
-        margin-left: 15px;
+        margin-left: 25px !important;
+        margin-right: 25px !important;
     }
 
     .backBtn {
-        margin-left: 25px !important;
+        margin-left: .1rem !important;
     }
 }
 

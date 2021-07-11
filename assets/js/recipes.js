@@ -189,7 +189,7 @@ function createBackBtnSuggested (){
   // set class for bulma and font awesome icon
   btnSpan.setAttribute("class", "icon is-medium back");
   backBtn.setAttribute("class", "button is-success backBtn back");
-  backBtn.setAttribute("style", "position: relative; margin-left: -2rem; margin-top: -2rem; margin-bottom: 1rem; max-width: 6rem;");
+  backBtn.setAttribute("style", "position: relative; margin-left: -.1rem; margin-top: -2rem; margin-bottom: 1rem; max-width: 6rem;");
   icon.setAttribute("class", "fas fa-chevron-left back");
   innerSpan.setAttribute("class", "back");
   innerSpan.textContent = "Back"
