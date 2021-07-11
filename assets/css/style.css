@@ -14,6 +14,11 @@ nav {
     max-height: 100px;
 }
 
+.active {
+    /* color: yellow !important; */
+    font-weight:800 !important;
+}
+
 .footer {
     background-color: white;
     margin-top: 8rem;
