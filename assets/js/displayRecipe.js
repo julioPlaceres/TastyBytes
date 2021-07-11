@@ -50,16 +50,19 @@ function displayRecipeCallback(){
 
 	// Assign values to the elements and format them
 	recipeName.textContent = recipeSelected.title;
+	let titleDiv = document.createElement("div");
+	titleDiv.setAttribute("class","column has-text-centered is-size-5 has-text-weight-semibold box has-background-success has-text-white mt-4 mb-3");
 	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
-	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners my-5");
+	imageHolder.setAttribute("class", "column fitImg box has-background-success my-4 p-5");
 	recipeImage.setAttribute("src", recipeSelected.image);
 	recipeImage.setAttribute("class", "column roundedCorners container");
 	recipeSummary.setAttribute("class", "mb-5");
 	recipeSummary.innerHTML = recipeInfo[0].summary;
 
 	// Select the div that will hold the recipe selected and append to page
-	imageHolder.append(recipeName);
+	titleDiv.append(recipeName);
 	imageHolder.append(recipeImage);
+	recipeSelectedEl.append(titleDiv);
 	recipeSelectedEl.append(imageHolder);
 	recipeSelectedEl.append(recipeSummary);
 
