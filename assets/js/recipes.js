@@ -89,10 +89,6 @@ function storeIngredients() {
 
 // Will search for a max of 5 recipes by ingredients
 function searchRecipeByIngredients() {
-	if (ingredients == ""){
-		alert("Add ingredients and then search for recipes")
-		return;
-	}
 	//function to create the url based on what is in the ingredients array
 		let apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=";
 		// loop through array of ingredients, add them to the url in the proper way
@@ -102,6 +98,10 @@ function searchRecipeByIngredients() {
 		// add the tail of the url after ingredients
 		apiUrl += "&number=5&ignorePantry=true&ranking=1";
 		// output the url for fetch request
+	if (ingredients.length < 1){
+		apiUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=5";
+	}
+	console.log(apiUrl);
 	fetch(apiUrl, {
 		"method": "GET",
 		"headers": {
@@ -118,6 +118,9 @@ function searchRecipeByIngredients() {
 		.then(function (data) {
 			// set global var to JSON object
 					recipeData = data;
+					if (ingredients < 1){
+						recipeData = data.recipes;
+					}
 			console.log(recipeData);
 			if (recipeData != ""){
 				// if the api returned info, show it on page

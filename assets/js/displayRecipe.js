@@ -13,8 +13,6 @@ var glutenFreeEl;
 var recipeSelected;
 var idSelected;
 
-console.log(recipeInfo);
-
 // Displays information of the selected recipe on the screen
 function displayRecipe(event) {
 	// if the target clicked is not an image will return
