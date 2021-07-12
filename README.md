@@ -18,7 +18,7 @@
 https://julioplaceres.github.io/TastyBytes/
 
 # Technologies:
-We built this responsive, mobile-first, web app using HTML/CSS and JavaScript. We used the open-source Bulma CSS framework for styling as well. The data in this project is coming from 2 APIs [Spoonacular](https://rapidapi.com/spoonacular/api/recipe-food-nutrition/) and [The Cocktail DB](https://rapidapi.com/thecocktaildb/api/the-cocktail-db/)
+We built this responsive, mobile-first, progressive web app (PWA) using HTML/CSS and JavaScript. We used the open-source Bulma CSS framework for styling as well. The data in this project is coming from 2 APIs [Spoonacular](https://rapidapi.com/spoonacular/api/recipe-food-nutrition/) and [The Cocktail DB](https://rapidapi.com/thecocktaildb/api/the-cocktail-db/)
 
 
 # Motivation:
