@@ -10,6 +10,12 @@ burgerIcon.addEventListener("click", () => {
     console.log("clicked");
     navbarMenu.classList.toggle("is-active");
     dropdown.setAttribute("class", "navbar-dropdown is-hidden");
+    if (burgerIcon.classList.contains("is-active")){
+        burgerIcon.classList.remove("is-active");
+    }
+    else{
+        burgerIcon.classList.add("is-active");
+    }
 })
 
 expandDropdownEl.addEventListener("click", () => {
