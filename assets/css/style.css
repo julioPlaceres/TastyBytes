@@ -11,8 +11,9 @@ body {
     flex-direction: column;
 }
 
-button:active {
+button:active, a:active {
         background-color: rgba(0,0,0,0) !important;
+        box-shadow: none !important;
 }
 
 header {
