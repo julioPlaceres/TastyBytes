@@ -27,6 +27,11 @@ nav {
     font-weight:800 !important;
 }
 
+.navbar-menu {
+    border-radius: 8px;
+    transition: all .3s ease-in-out !important
+}
+
 .main-wrapper {
     margin-bottom: 6rem!important;
 }
