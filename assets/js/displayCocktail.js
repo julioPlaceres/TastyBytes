@@ -343,11 +343,11 @@ function getIcon(status){
 		break;
 
 		case false:
-			iconContent = getIconStatus("has-text-warning", "fa-exclamation-triangle", "No");
+			iconContent = getIconStatus("has-text-danger", "fa-exclamation-triangle", "No");
 		break;
 
 		default:
-			iconContent = getIconStatus("has-text-warning", "fa-exclamation-triangle", "No information found");
+			iconContent = getIconStatus("has-text-danger", "fa-exclamation-triangle", "No information found");
 		break;
 	}
 	iconSet.append(iconContent);
