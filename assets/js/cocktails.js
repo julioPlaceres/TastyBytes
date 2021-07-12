@@ -22,26 +22,26 @@ function getPopularCocktails() {
  fetch(popularCockTailsUrl, {
   "method": "GET",
 	"headers": {
-		"x-rapidapi-key": "e4f90a1b56msh4d99ca7b80ba747p18736ejsn46447159ba5e",
+		"x-rapidapi-key": "33ef1227f7mshc8156db8b699828p17ffedjsnc09b55333544",
 		"x-rapidapi-host": "the-cocktail-db.p.rapidapi.com"
 	}
   })
    .then(function (res) {
       // checks if res works correctly
       if (res.ok == true) {
-        console.log(res);
+        //console.log(res);
         return res.json();    
       }
     })
 
     .then(function (data) {
       // todo mu
-      console.log(data);
+      //console.log(data);
       
     })
     //Error handler
     .catch((err) => {
-      console.error(err);
+      //console.error(err);
     });
 }
 // api call to get cocktails from ingredients input
@@ -58,11 +58,11 @@ function getCocktailByIngredient (){
 	if (cocktailIngredients.length < 1) {
 		getCockTailsUrl = "https://the-cocktail-db.p.rapidapi.com/popular.php";
 	}
-	console.log(getCockTailsUrl);
+	//console.log(getCockTailsUrl);
   fetch(getCockTailsUrl, {
     "method": "GET",
     "headers": {
-      "x-rapidapi-key": "e4f90a1b56msh4d99ca7b80ba747p18736ejsn46447159ba5e",
+      "x-rapidapi-key": "33ef1227f7mshc8156db8b699828p17ffedjsnc09b55333544",
       "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com"
     }
     })
@@ -78,7 +78,7 @@ function getCocktailByIngredient (){
   
       .then(function (data) {
         
-        console.log(data);
+        //console.log(data);
         cocktailList = data.drinks;
 				fillSuggestedRecipes(cocktailList);
         
@@ -186,6 +186,7 @@ function fillSuggestedRecipes() {
 		columnLayout(title, recipePicUrl, i);
 	}
 	hideTile1();
+	
 }
 
 
@@ -257,6 +258,9 @@ function goBackIng (event){
 			// hide tile 2 and show tile 1
 			tile1.classList.remove("is-hidden");
 			tile2.classList.add("is-hidden");
+		}
+		else{
+			displayRecipe();
 		}
   }
 }
