@@ -6,7 +6,13 @@ body, html {
     touch-action: manipulation;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 header {
+    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
     margin-bottom: 2rem;
     max-height: 150px;
 }
@@ -21,10 +27,31 @@ nav {
     font-weight:800 !important;
 }
 
+.navbar-menu {
+    border-radius: 8px;
+    transition: all .3s ease-in-out !important
+}
+
+.main-wrapper {
+    margin-bottom: 6rem!important;
+}
+
+.output {
+    min-height: 100% !important;
+}
+
+.push, .footer {
+    height: 50px;
+}
+
 .footer {
+    position: relative;
+    bottom:0 !important;
+    left: 0 !important;
+    width: 100%;
     background-color: white;
-    margin-top: 8rem;
-    padding: 3rem 1.5rem 2rem !important;
+    justify-content: center;
+    flex-shrink: 0 !important;
 }
 
 .logo {
@@ -80,6 +107,11 @@ nav {
     header {
         margin-bottom: 1rem !important;
     }
+
+    .main-wrapper{
+        margin-top: 1rem !important;
+    }
+
     .left-tile {
         margin-right: 25px !important;
         margin-left: 25px !important;
