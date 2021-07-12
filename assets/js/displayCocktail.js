@@ -13,7 +13,7 @@ var glutenFreeEl;
 var recipeSelected;
 var idSelected;
 
-console.log(recipeInfo);
+//console.log(recipeInfo);
 
 // Displays information of the selected recipe on the screen
 function displayRecipe(event) {
@@ -32,16 +32,17 @@ function displayRecipe(event) {
 	let imageSelected = event.target;
 	// Retrieve Data Attribute assign to image
 	idSelected = imageSelected.dataset.id;
-	getRecipeInfo(idSelected);
+	displayRecipeCallback();
 }
 
 function displayRecipeCallback(){
 	// Loops through the recipe object array in order to get the ID and
 	// retrive the object for the main recipe
-	for (let i = 0; i < recipeData.length; i++) {
-		if (idSelected == recipeData[i].id) {
-			recipeSelected = recipeData[i];
-		}
+	for (let i = 0; i < cocktailList.length; i++) {
+		if (idSelected == cocktailList[i].idDrink) {
+			recipeSelected = cocktailList[i];
+			console.log(recipeSelected);
+		}	
 	}
 
 	// Create the elements needed for the display of the recipe
@@ -51,13 +52,14 @@ function displayRecipeCallback(){
 	let recipeSummary = document.createElement("p");
 
 	// Assign values to the elements and format them
-	recipeName.textContent = recipeSelected.title;
+	//console.log(recipeSelected);
+	recipeName.textContent = recipeSelected.strDrink;
 	recipeName.setAttribute("class", "has-text-centered is-size-5 has-text-white has-text-weight-semibold")
-	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners");
-	recipeImage.setAttribute("src", recipeSelected.image);
+	imageHolder.setAttribute("class", "column fitImg box has-background-success roundedCorners mt-3");
+	recipeImage.setAttribute("src", recipeSelected.strDrinkThumb);
 	recipeImage.setAttribute("class", "column roundedCorners container");
 	recipeSummary.setAttribute("class", "mb-5");
-	recipeSummary.innerHTML = recipeInfo[0].summary;
+	recipeSummary.innerHTML = recipeSelected.strInstructions;
 
 	// Select the div that will hold the recipe selected and append to page
 	imageHolder.append(recipeName);
@@ -65,101 +67,126 @@ function displayRecipeCallback(){
 	recipeSelectedEl.append(imageHolder);
 	recipeSelectedEl.append(recipeSummary);
 
+	let fullArray = [
+		recipeSelected.strIngredient1,
+		recipeSelected.strIngredient2,
+		recipeSelected.strIngredient3,
+		recipeSelected.strIngredient4,
+		recipeSelected.strIngredient5,
+		recipeSelected.strIngredient6
+	]
+	let recipeSelectedArray = [];
+
 	// Will display missed ingredients to the page (needs to be bold)
-	for (let i = 0; i < recipeSelected.missedIngredients.length; i++) {
+	for (let i = 0; i < fullArray.length; i++) {
+		// Push elements with values to cocktail array
+		if(fullArray[i] != null){
+			recipeSelectedArray.push(fullArray[i]);
+		}
+	}
+	//createIngredientsTable();
+
+	for (let i = 0; i < recipeSelectedArray.length; i++) {
 		// 	Creates a table
 		let trEl = document.createElement("tr");
 		let tdQty = document.createElement("td");
 		let tdName = document.createElement("td");
 
+			trEl.appendChild(tdQty);
+			trEl.appendChild(tdName);
+			//ingredientsTbodyEl.appendChild(trEl);
+	}
+
+
+
 		// Get values from array
-		let amount = recipeSelected.missedIngredients[i].amount;
-		let productName = recipeSelected.missedIngredients[i].name;
+		//let amount = recipeSelected.missedIngredients[i].amount;
+		//let productName = recipeSelected.missedIngredients[i].name;
 
 		// Will be use to loop through the ingredients of the second API call
 		// to get the missing ingredient index
-		let ingredientIndex;
+		//let ingredientIndex;
 		//Find the index of the ingredient missing
 		
-		for (let a = 0; a < recipeInfo[0].extendedIngredients.length; a++) {
-			searchIndex = recipeInfo[0].extendedIngredients[a].name.indexOf(productName);
-			if (searchIndex != -1) {
-				ingredientIndex = a;
-				break;
-			}
-		}
+		// for (let a = 0; a < recipeInfo[0].extendedIngredients.length; a++) {
+		// 	searchIndex = recipeInfo[0].extendedIngredients[a].name.indexOf(productName);
+		// 	if (searchIndex != -1) {
+		// 		ingredientIndex = a;
+		// 		break;
+		// 	}
+		// }
 		
-		// Get values from array
-		let units = recipeInfo[0].extendedIngredients[ingredientIndex].unit;
+	// 	// Get values from array
+	// 	let units = recipeInfo[0].extendedIngredients[ingredientIndex].unit;
 		
-		// 	Give it context and Style
-		tdQty.innerHTML = "<b>" + amount + " " + units + "</b>";
-		tdName.innerHTML = "<b>" + productName + "</b>";
+	// 	// 	Give it context and Style
+	// 	tdQty.innerHTML = "<b>" + amount + " " + units + "</b>";
+	// 	tdName.innerHTML = "<b>" + productName + "</b>";
 		
-		function fillIngredients (){
-		// Appends to Page
-			trEl.appendChild(tdQty);
-			trEl.appendChild(tdName);
-			ingredientsTbodyEl.appendChild(trEl);
+	// 	function fillIngredients (){
+	// 	// Appends to Page
+	// 		trEl.appendChild(tdQty);
+	// 		trEl.appendChild(tdName);
+	// 		ingredientsTbodyEl.appendChild(trEl);
 			
-			// Will display the current used ingredients
-			for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
-				// Creates a row
-				let trEl = document.createElement("tr");
-				let tdQty = document.createElement("td");
-				let tdName = document.createElement("td");
+	// 		// Will display the current used ingredients
+	// 		for (let i = 0; i < recipeSelected.usedIngredients.length; i++) {
+	// 			// Creates a row
+	// 			let trEl = document.createElement("tr");
+	// 			let tdQty = document.createElement("td");
+	// 			let tdName = document.createElement("td");
 				
-				// Get values and format it
-				let amount = recipeSelected.usedIngredients[i].amount;
-				let productName = recipeSelected.usedIngredients[i].name;
+	// 			// Get values and format it
+	// 			let amount = recipeSelected.usedIngredients[i].amount;
+	// 			let productName = recipeSelected.usedIngredients[i].name;
 				
-				// Will be use to loop through the ingredients of the second API call
-				// to get the rest of the ingredients index
-				for (let a = 0; a < recipeInfo[0].extendedIngredients.length; a++) {
-					searchIndex = recipeInfo[0].extendedIngredients[a].name.indexOf(productName);
-					if (searchIndex != -1) {
-						ingredientIndex = a
-						break;
-					}
-				}
+	// 			// Will be use to loop through the ingredients of the second API call
+	// 			// to get the rest of the ingredients index
+	// 			for (let a = 0; a < recipeInfo[0].extendedIngredients.length; a++) {
+	// 				searchIndex = recipeInfo[0].extendedIngredients[a].name.indexOf(productName);
+	// 				if (searchIndex != -1) {
+	// 					ingredientIndex = a
+	// 					break;
+	// 				}
+	// 			}
 				
-				// Get values from array
-				let units = recipeInfo[0].extendedIngredients[ingredientIndex].unit;
+	// 			// Get values from array
+	// 			let units = recipeInfo[0].extendedIngredients[ingredientIndex].unit;
 				
-				// Give it context
-				tdQty.textContent = amount + " " + units;
-				tdName.textContent = productName;
+	// 			// Give it context
+	// 			tdQty.textContent = amount + " " + units;
+	// 			tdName.textContent = productName;
 				
-				// Appends to Page
-				trEl.appendChild(tdQty);
-				trEl.appendChild(tdName);
-				ingredientsTbodyEl.appendChild(trEl);
-			}
+	// 			// Appends to Page
+	// 			trEl.appendChild(tdQty);
+	// 			trEl.appendChild(tdName);
+	// 			ingredientsTbodyEl.appendChild(trEl);
+	// 		}
 			
-		}
-		if (recipeInfo[0].nutrients != undefined)	{
-			createNutritionTable();
+	// 	}
+	// 	if (recipeInfo[0].nutrients != undefined)	{
+	// 		createNutritionTable();
 			
-			// Nutrition info
-			displayNutritionInfo("Calories");
-			displayNutritionInfo("Sugar");
-			displayNutritionInfo("Fat");
-			displayNutritionInfo("Protein");
+	// 		// Nutrition info
+	// 		displayNutritionInfo("Calories");
+	// 		displayNutritionInfo("Sugar");
+	// 		displayNutritionInfo("Fat");
+	// 		displayNutritionInfo("Protein");
 			
-		}
-	}
-	// Additional nutrition
-	if (recipeInfo[0].extendedIngredients != undefined){
+	// 	}
+	// }
+	//Additional nutrition
+	// if (recipeInfo[0].extendedIngredients != undefined){
 		
-		// creates table and back button
-		createIngredientsTable();
-		fillIngredients();
-	}
-	if (recipeInfo[0].analyzedInstructions != ""){
-		displayPrepInstructions();
-	}
-			createNutritionFooter();
-			setNutritionFooter();
+	// 	// creates table and back button
+
+	// 	fillIngredients();
+	// }
+	// if (recipeInfo[0].analyzedInstructions != ""){
+	// 	displayPrepInstructions();
+	// }
+	// 		createNutritionFooter();
+	// 		setNutritionFooter();
 }
 
 function createIngredientsTable() {
