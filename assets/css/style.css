@@ -1,11 +1,13 @@
-body {
+body, html {
     background-image: linear-gradient(rgb(6, 242, 171), rgb(14, 240, 240));
+    max-width: 100% !important;
+    overflow-x: hidden;
+    height: 100%;
     touch-action: manipulation;
 }
 
 header {
-    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
-    margin-bottom: 8.0rem;
+    margin-bottom: 2rem;
     max-height: 150px;
 }
 
@@ -16,7 +18,6 @@ nav {
 }
 
 .active {
-    /* color: yellow !important; */
     font-weight:800 !important;
 }
 
@@ -33,6 +34,10 @@ nav {
     align-self: center;
     transform: scale(2.0) !important;
     margin-right: 20px !important; 
+}
+
+.navbar-burger:hover{
+    background-color: rgba(0,0,0,0) !important;
 }
 
 .navbar-item {
@@ -72,6 +77,9 @@ nav {
 }
 
 @media  screen and (max-width:1024px) {
+    header {
+        margin-bottom: 1rem !important;
+    }
     .left-tile {
         margin-right: 25px !important;
         margin-left: 25px !important;
