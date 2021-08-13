@@ -1,89 +1,94 @@
-body, html {
-    background-image: linear-gradient(rgb(6, 242, 171), rgb(14, 240, 240));
-    max-width: 100% !important;
-    overflow-x: hidden;
-    height: 100%;
-    touch-action: manipulation;
+body,
+html {
+  /* background-image: linear-gradient(rgb(6, 242, 171), rgb(14, 240, 240)); */
+  background-color: #48c78e !important;
+  max-width: 100% !important;
+  overflow-x: hidden;
+  height: 100%;
+  touch-action: manipulation;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-button:focus, a:focus {
-        background-color: rgba(0,0,0,0) !important;
-        box-shadow: rgba(0,0,0,0) !important;
+button:focus,
+a:focus {
+  background-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: rgba(0, 0, 0, 0) !important;
 }
 
 header {
-    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
-    margin-bottom: 2rem;
-    max-height: 150px;
+  /* background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171)); */
+  margin-bottom: 2rem;
+  max-height: 150px;
 }
 
 nav {
-    background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171));
-    /* padding: 2rem; */
-    max-height: 100px;
+  /* background-image: linear-gradient(rgb(14, 240, 240), rgb(6, 242, 171)); */
+  background-color: #48c78e !important;
+  /* padding: 2rem; */
+  max-height: 100px;
 }
 
 .active {
-    font-weight:800 !important;
+  font-weight: 800 !important;
 }
 
 .navbar-menu {
-    border-radius: 8px;
-    transition: all .3s ease-in-out !important
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out !important;
 }
 
 .main-wrapper {
-    margin-bottom: 6rem!important;
+  margin-bottom: 6rem !important;
 }
 
 .output {
-    min-height: 100% !important;
+  min-height: 100% !important;
 }
 
-.push, .footer {
-    height: 50px;
+.push,
+.footer {
+  height: 50px;
 }
 
 .footer {
-    position: relative;
-    bottom:0 !important;
-    left: 0 !important;
-    width: 100%;
-    background-color: white;
-    justify-content: center;
-    flex-shrink: 0 !important;
+  position: relative;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  background-color: white;
+  justify-content: center;
+  flex-shrink: 0 !important;
 }
 
 .logo {
-    border-radius: 40%;
+  border-radius: 40%;
 }
 .navbar-burger {
-    align-self: center;
-    transform: scale(2.0) !important;
-    margin-right: 20px !important; 
+  align-self: center;
+  transform: scale(2) !important;
+  margin-right: 20px !important;
 }
 
-.navbar-burger:hover{
-    background-color: rgba(0,0,0,0) !important;
+.navbar-burger:hover {
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .navbar-item {
-    font-size: 1.7rem;
-    padding-right: 10.0rem !important;
+  font-size: 1.7rem;
+  padding-right: 10rem !important;
 }
 
 /* round img corners */
 .roundedCorners {
-    border-radius: 30px !important;
+  border-radius: 30px !important;
 }
 /* round list of ingredients  */
 .message-header {
-    border-radius: 4px !important;
+  border-radius: 4px !important;
 }
 
 /* .link:hover {
@@ -91,56 +96,52 @@ nav {
 } */
 
 .fitImg {
-    align-self: center;
-    border-radius: 25px;
-    padding: 15px;
-   }
+  align-self: center;
+  border-radius: 25px;
+  padding: 15px;
+}
 .fitText {
-     align-content: center;
-   }
+  align-content: center;
+}
 
 #logo {
-    width: 300px !important;
-    height: 100px !important;
-} 
+  width: 300px !important;
+  height: 100px !important;
+}
 
 .column img:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-@media  screen and (max-width:1024px) {
-    header {
-        margin-bottom: 1rem !important;
-    }
+@media screen and (max-width: 1024px) {
+  header {
+    margin-bottom: 1rem !important;
+  }
 
-    .main-wrapper{
-        margin-top: 1rem !important;
-    }
+  .main-wrapper {
+    margin-top: 1rem !important;
+  }
 
-    .left-tile {
-        margin-right: 25px !important;
-        margin-left: 25px !important;
-    }
-    
-    .right-tile {
-        margin-left: 25px !important;
-        margin-right: 25px !important;
-    }
+  .left-tile {
+    margin-right: 25px !important;
+    margin-left: 25px !important;
+  }
 
-    .backBtn {
-        margin-left: .1rem !important;
-    }
+  .right-tile {
+    margin-left: 25px !important;
+    margin-right: 25px !important;
+  }
 
-    .tile {
-        justify-content: center !important;
-    }
+  .backBtn {
+    margin-left: 0.1rem !important;
+  }
 
-    #search-input, .button {
-        height: 3.5rem !important;
-    }
+  .tile {
+    justify-content: center !important;
+  }
 
-
+  #search-input,
+  .button {
+    height: 3.5rem !important;
+  }
 }
-
-
-
